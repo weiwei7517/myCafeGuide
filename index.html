@@ -4,57 +4,48 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MY CAFE GUIDE｜台中咖啡廳</title>
-
 <style>
 *{
   box-sizing:border-box;
 }
-
 body{
   margin:0;
   background:#f7f6f3;
   color:#333;
   font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang TC","Noto Sans TC",Arial,sans-serif;
 }
-
 header{
   background:#fff;
   padding:28px 20px 22px;
   text-align:center;
   border-bottom:1px solid #eee;
 }
-
 header h1{
   margin:0;
   font-size:20px;
   letter-spacing:2px;
   font-weight:600;
 }
-
 header .sub{
   margin-top:7px;
   font-size:15px;
   letter-spacing:2px;
 }
-
 header .small{
   margin-top:8px;
   font-size:12px;
   color:#999;
 }
-
 .top-area{
   padding:15px;
   max-width:900px;
   margin:auto;
 }
-
 .search-box{
   display:flex;
   gap:8px;
   margin-bottom:12px;
 }
-
 .search-box input{
   flex:1;
   border:1px solid #ddd;
@@ -64,7 +55,6 @@ header .small{
   outline:none;
   background:#fff;
 }
-
 .add-btn{
   border:0;
   background:#333;
@@ -73,14 +63,12 @@ header .small{
   padding:0 16px;
   font-size:14px;
 }
-
 .categories{
   display:flex;
   gap:7px;
   overflow-x:auto;
   padding-bottom:5px;
 }
-
 .categories button{
   flex:none;
   border:1px solid #ddd;
@@ -90,19 +78,16 @@ header .small{
   padding:8px 13px;
   font-size:13px;
 }
-
 .categories button.active{
   background:#333;
   color:#fff;
   border-color:#333;
 }
-
 #cafeList{
   max-width:900px;
   margin:0 auto;
   padding:0 15px 40px;
 }
-
 .cafe-card{
   background:#fff;
   border-radius:15px;
@@ -110,18 +95,14 @@ header .small{
   margin-bottom:18px;
   box-shadow:0 2px 10px rgba(0,0,0,.04);
 }
-
 /* =========================
    照片
 ========================= */
-
 .photo-area{
   background:#eee;
   position:relative;
   overflow:hidden;
 }
-
-/* 固定 1:1，而且可以調整整個正方形大小 */
 .photo-wrap{
   width:min(var(--photo-size,260px),100%);
   aspect-ratio:1 / 1;
@@ -129,8 +110,8 @@ header .small{
   position:relative;
   overflow:hidden;
   background:#eee;
+  touch-action:none;
 }
-
 .photo-wrap img{
   position:absolute;
   left:0;
@@ -139,17 +120,16 @@ header .small{
   height:100%;
   max-width:none;
   object-fit:cover;
-
   transform:
     translate(
-      var(--photo-x,0%),
-      var(--photo-y,0%)
+      var(--photo-x,0px),
+      var(--photo-y,0px)
     )
     scale(var(--photo-scale,1));
-
   transform-origin:center center;
+  user-select:none;
+  -webkit-user-drag:none;
 }
-
 .photo-placeholder{
   width:100%;
   height:100%;
@@ -159,7 +139,6 @@ header .small{
   color:#aaa;
   font-size:13px;
 }
-
 .photo-count{
   position:absolute;
   right:10px;
@@ -170,28 +149,23 @@ header .small{
   border-radius:20px;
   font-size:11px;
 }
-
 /* =========================
    卡片
 ========================= */
-
 .card-content{
   padding:16px;
 }
-
 .card-top{
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
   gap:10px;
 }
-
 .card-title{
   font-size:18px;
   font-weight:600;
   margin:0;
 }
-
 .favorite{
   border:0;
   background:none;
@@ -199,21 +173,18 @@ header .small{
   padding:0;
   line-height:1;
 }
-
 .meta{
   margin-top:8px;
   color:#888;
   font-size:13px;
   line-height:1.7;
 }
-
 .tags{
   display:flex;
   flex-wrap:wrap;
   gap:6px;
   margin-top:10px;
 }
-
 .tag{
   background:#f2f1ee;
   color:#666;
@@ -221,20 +192,16 @@ header .small{
   border-radius:20px;
   font-size:11px;
 }
-
-/* 備注保持正常排版，不飄 */
 .description-box{
   margin-top:12px;
   padding-top:12px;
   border-top:1px solid #eee;
 }
-
 .description-title{
   font-size:12px;
   color:#999;
   margin-bottom:5px;
 }
-
 .description{
   font-size:14px;
   color:#555;
@@ -242,13 +209,11 @@ header .small{
   white-space:pre-wrap;
   word-break:break-word;
 }
-
 .card-actions{
   display:flex;
   gap:8px;
   margin-top:14px;
 }
-
 .card-actions button{
   flex:1;
   border:1px solid #ddd;
@@ -258,24 +223,20 @@ header .small{
   font-size:12px;
   color:#555;
 }
-
 .card-actions button.map{
   background:#333;
   color:#fff;
   border-color:#333;
 }
-
 .empty{
   text-align:center;
   color:#aaa;
   padding:60px 20px;
   font-size:14px;
 }
-
 /* =========================
    Modal
 ========================= */
-
 .modal{
   position:fixed;
   inset:0;
@@ -286,11 +247,9 @@ header .small{
   padding:15px;
   z-index:999;
 }
-
 .modal.show{
   display:flex;
 }
-
 .modal-box{
   background:#fff;
   width:100%;
@@ -300,24 +259,20 @@ header .small{
   border-radius:16px;
   padding:20px;
 }
-
 .modal-title{
   font-size:18px;
   font-weight:600;
   margin-bottom:18px;
 }
-
 .form-group{
   margin-bottom:14px;
 }
-
 .form-group label{
   display:block;
   font-size:13px;
   color:#555;
   margin-bottom:7px;
 }
-
 .form-group input,
 .form-group textarea,
 .form-group select{
@@ -329,53 +284,44 @@ header .small{
   outline:none;
   background:#fff;
 }
-
 .form-group textarea{
   min-height:110px;
   resize:vertical;
   line-height:1.7;
 }
-
 /* =========================
    照片大小
 ========================= */
-
 .image-size-box{
   background:#f7f6f3;
   padding:12px;
   border-radius:10px;
 }
-
 .helper{
   font-size:11px;
   color:#999;
   margin-top:6px;
   line-height:1.6;
 }
-
 /* =========================
    每張照片調整
 ========================= */
-
 .photo-edit-list{
   display:flex;
   flex-direction:column;
   gap:14px;
 }
-
 .photo-editor{
   border:1px solid #eee;
   border-radius:12px;
   padding:12px;
   background:#fafafa;
 }
-
 .photo-editor-title{
   font-size:12px;
   color:#777;
   margin-bottom:10px;
 }
-
 .adjust-preview{
   width:180px;
   height:180px;
@@ -384,8 +330,12 @@ header .small{
   overflow:hidden;
   background:#eee;
   border-radius:8px;
+  touch-action:none;
+  cursor:grab;
 }
-
+.adjust-preview:active{
+  cursor:grabbing;
+}
 .adjust-preview img{
   position:absolute;
   left:0;
@@ -394,58 +344,54 @@ header .small{
   height:100%;
   max-width:none;
   object-fit:cover;
-
   transform:
     translate(
-      var(--preview-x,0%),
-      var(--preview-y,0%)
+      var(--preview-x,0px),
+      var(--preview-y,0px)
     )
     scale(var(--preview-scale,1));
-
   transform-origin:center center;
+  user-select:none;
+  -webkit-user-drag:none;
+  pointer-events:none;
 }
-
 .adjust-controls{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1fr;
   gap:10px;
 }
-
 .control-item{
   background:#fff;
   border-radius:9px;
   padding:9px;
 }
-
-.control-item.full{
-  grid-column:1 / -1;
-}
-
 .control-item label{
   font-size:11px;
   color:#777;
   display:block;
   margin-bottom:5px;
 }
-
 .control-item input[type="range"]{
   width:100%;
 }
-
 .range-value{
   text-align:center;
   font-size:11px;
   color:#999;
   margin-top:3px;
 }
-
+.drag-helper{
+  text-align:center;
+  font-size:11px;
+  color:#999;
+  margin-bottom:10px;
+}
 .preview-list{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
   margin-top:10px;
 }
-
 .preview-item{
   position:relative;
   width:90px;
@@ -454,13 +400,11 @@ header .small{
   overflow:hidden;
   background:#eee;
 }
-
 .preview-item img{
   width:100%;
   height:100%;
   object-fit:cover;
 }
-
 .preview-item button{
   position:absolute;
   right:4px;
@@ -473,13 +417,11 @@ header .small{
   color:#fff;
   font-size:12px;
 }
-
 .modal-actions{
   display:flex;
   gap:8px;
   margin-top:20px;
 }
-
 .modal-actions button{
   flex:1;
   border:1px solid #ddd;
@@ -488,45 +430,35 @@ header .small{
   border-radius:9px;
   font-size:14px;
 }
-
 .modal-actions .save{
   background:#333;
   color:#fff;
   border-color:#333;
 }
-
 .delete-btn{
   color:#b44 !important;
 }
-
 @media(max-width:600px){
-
   .adjust-preview{
     width:160px;
     height:160px;
   }
-
 }
 </style>
 </head>
-
 <body>
-
 <header>
   <h1>MY CAFE GUIDE</h1>
   <div class="sub">台中咖啡廳</div>
   <div class="small">慢慢喝一杯，找到喜歡的地方 ♡</div>
 </header>
-
 <div class="top-area">
-
   <div class="search-box">
     <input
       id="searchInput"
       type="text"
       placeholder="搜尋咖啡廳、地址、特色..."
     >
-
     <button
       class="add-btn"
       onclick="openModal()"
@@ -534,108 +466,75 @@ header .small{
       ＋ 新增
     </button>
   </div>
-
   <div
     class="categories"
     id="categories"
   ></div>
-
 </div>
-
 <div id="cafeList"></div>
-
-<!-- =========================
-     編輯視窗
-========================= -->
-
-<div
-  class="modal"
-  id="modal"
->
-
+<div class="modal" id="modal">
   <div class="modal-box">
-
     <div
       class="modal-title"
       id="modalTitle"
     >
       新增咖啡廳
     </div>
-
     <div class="form-group">
       <label>店名</label>
-
       <input
         id="name"
         type="text"
         placeholder="例如：某某咖啡"
       >
     </div>
-
     <div class="form-group">
       <label>區域</label>
-
       <select id="area"></select>
     </div>
-
     <div class="form-group">
       <label>地址</label>
-
       <input
         id="address"
         type="text"
         placeholder="輸入地址"
       >
     </div>
-
     <div class="form-group">
       <label>Instagram</label>
-
       <input
         id="instagram"
         type="text"
         placeholder="Instagram 網址"
       >
     </div>
-
     <div class="form-group">
       <label>特色／標籤</label>
-
       <input
         id="tags"
         type="text"
         placeholder="例如：不限時, 有插座, 寵物友善"
       >
     </div>
-
     <div class="form-group">
-
       <label>照片</label>
-
       <input
         id="photos"
         type="file"
         accept="image/*,.heic,.heif"
         multiple
       >
-
       <div class="helper">
         可以一次選很多張照片，系統會自動壓縮。
       </div>
-
       <div
         class="preview-list"
         id="previewList"
       ></div>
-
     </div>
-
     <div class="form-group">
-
       <label>照片大小（1:1）</label>
-
       <div class="image-size-box">
-
         <input
           id="imageHeight"
           type="number"
@@ -643,55 +542,39 @@ header .small{
           max="600"
           value="260"
         >
-
         <div class="helper">
           例如輸入 300，就是 300 × 300。<br>
-          照片會固定為 1:1 正方形。
+          外框固定 1:1，照片可以自由縮放及移動。
         </div>
-
       </div>
-
     </div>
-
     <div class="form-group">
-
-      <label>調整照片位置</label>
-
+      <label>調整照片</label>
       <div
         class="helper"
         style="margin-bottom:10px;"
       >
-        每張照片可以個別調整。<br>
-        食物在下面，就把「上下位置」往上調。
+        可以直接用手指拖曳照片。<br>
+        手機也可以雙指縮放。系統會自動防止照片露白。
       </div>
-
       <div
         class="photo-edit-list"
         id="photoEditList"
       ></div>
-
     </div>
-
-    <!-- 原本備注欄 -->
     <div class="form-group">
-
       <label>備注</label>
-
       <textarea
         id="description"
         placeholder="輸入咖啡廳備注..."
       ></textarea>
-
     </div>
-
     <div class="modal-actions">
-
       <button
         onclick="closeModal()"
       >
         取消
       </button>
-
       <button
         class="delete-btn"
         id="deleteBtn"
@@ -700,33 +583,17 @@ header .small{
       >
         刪除
       </button>
-
       <button
         class="save"
         onclick="saveCafe()"
       >
         儲存
       </button>
-
     </div>
-
   </div>
-
 </div>
-
 <script>
-
-/* =========================================================
-   ★★★ 最重要：沿用原本資料 key，不改
-========================================================= */
-
 const STORAGE_KEY = "myCafeGuide";
-
-
-/* =========================================================
-   原本區域
-========================================================= */
-
 const areas = [
   "全部",
   "中區",
@@ -748,168 +615,100 @@ const areas = [
   "龍井區",
   "新社區"
 ];
-
-
-/* =========================================================
-   ★ 讀取原本資料
-   不建立新的資料庫、不清空
-========================================================= */
-
 let cafes = [];
-
 try{
-
   cafes =
     JSON.parse(
       localStorage.getItem(STORAGE_KEY) || "[]"
     );
-
   if(!Array.isArray(cafes)){
     cafes = [];
   }
-
 }catch(error){
-
   console.error(error);
   cafes = [];
-
 }
-
-
-/* =========================================================
-   狀態
-========================================================= */
-
 let currentArea = "全部";
-
 let editingId = null;
-
 let currentPhotos = [];
-
 let db = null;
-
-
 /* =========================================================
    IndexedDB
-   只拿來存照片，不動原本咖啡廳資料
 ========================================================= */
-
 function initDB(){
-
   return new Promise((resolve,reject)=>{
-
     const request =
       indexedDB.open(
         "MyCafeGuideImages",
         1
       );
-
     request.onupgradeneeded =
       function(event){
-
         const database =
           event.target.result;
-
         if(
           !database.objectStoreNames
             .contains("photos")
         ){
-
           database.createObjectStore(
             "photos",
             {
               keyPath:"id"
             }
           );
-
         }
-
       };
-
     request.onsuccess =
       function(event){
-
         db =
           event.target.result;
-
         resolve(db);
-
       };
-
     request.onerror =
       function(){
-
         reject(request.error);
-
       };
-
   });
-
 }
-
-
-/* =========================================================
-   存照片
-========================================================= */
-
 function saveImageBlob(id,blob){
-
   return new Promise(
     (resolve,reject)=>{
-
       if(!db){
         resolve();
         return;
       }
-
       const tx =
         db.transaction(
           "photos",
           "readwrite"
         );
-
       tx.objectStore("photos")
         .put({
           id:id,
           blob:blob
         });
-
       tx.oncomplete =
         ()=>resolve();
-
       tx.onerror =
         ()=>reject(tx.error);
-
     }
   );
-
 }
-
-
-/* =========================================================
-   讀照片
-========================================================= */
-
 function getImageBlob(id){
-
   return new Promise(
     (resolve,reject)=>{
-
       if(!db){
         resolve(null);
         return;
       }
-
       const tx =
         db.transaction(
           "photos",
           "readonly"
         );
-
       const request =
         tx.objectStore("photos")
           .get(id);
-
       request.onsuccess =
         ()=>{
           resolve(
@@ -918,188 +717,130 @@ function getImageBlob(id){
               : null
           );
         };
-
       request.onerror =
         ()=>{
           reject(request.error);
         };
-
     }
   );
-
 }
-
-
-/* =========================================================
-   刪照片
-========================================================= */
-
 function deleteImageBlob(id){
-
   return new Promise(
     (resolve,reject)=>{
-
       if(!db){
         resolve();
         return;
       }
-
       const tx =
         db.transaction(
           "photos",
           "readwrite"
         );
-
       tx.objectStore("photos")
         .delete(id);
-
       tx.oncomplete =
         ()=>resolve();
-
       tx.onerror =
         ()=>reject(tx.error);
-
     }
   );
-
 }
-
-
 /* =========================================================
    HEIC
 ========================================================= */
-
 function isHEIC(file){
-
   const name =
     file.name.toLowerCase();
-
   return(
     file.type === "image/heic" ||
     file.type === "image/heif" ||
     name.endsWith(".heic") ||
     name.endsWith(".heif")
   );
-
 }
-
-
 async function convertHEIC(file){
-
   if(!isHEIC(file)){
     return file;
   }
-
   if(
     typeof heic2any ===
     "undefined"
   ){
-
     throw new Error(
       "HEIC轉檔套件尚未載入"
     );
-
   }
-
   const converted =
     await heic2any({
       blob:file,
       toType:"image/jpeg",
       quality:.85
     });
-
   return Array.isArray(converted)
     ? converted[0]
     : converted;
-
 }
-
-
 /* =========================================================
    自動壓縮
 ========================================================= */
-
 async function compressImage(file){
-
   const converted =
     await convertHEIC(file);
-
   return new Promise(
     (resolve,reject)=>{
-
       const img =
         new Image();
-
       const url =
         URL.createObjectURL(
           converted
         );
-
       img.onload =
         function(){
-
           URL.revokeObjectURL(
             url
           );
-
           let width =
             img.width;
-
           let height =
             img.height;
-
           const maxSize =
             1400;
-
           if(
             width > maxSize ||
             height > maxSize
           ){
-
             if(width > height){
-
               height =
                 Math.round(
                   height *
                   maxSize /
                   width
                 );
-
               width =
                 maxSize;
-
             }else{
-
               width =
                 Math.round(
                   width *
                   maxSize /
                   height
                 );
-
               height =
                 maxSize;
-
             }
-
           }
-
           const canvas =
             document.createElement(
               "canvas"
             );
-
           canvas.width =
             width;
-
           canvas.height =
             height;
-
           const ctx =
             canvas.getContext(
               "2d"
             );
-
           ctx.drawImage(
             img,
             0,
@@ -1107,759 +848,688 @@ async function compressImage(file){
             width,
             height
           );
-
           let quality =
             .82;
-
           function tryCompress(){
-
             canvas.toBlob(
               function(blob){
-
                 if(!blob){
-
                   reject(
                     new Error(
                       "照片壓縮失敗"
                     )
                   );
-
                   return;
-
                 }
-
                 if(
                   blob.size >
                   180 * 1024 &&
                   quality > .45
                 ){
-
                   quality -= .08;
-
                   tryCompress();
-
                 }else{
-
                   resolve(blob);
-
                 }
-
               },
               "image/jpeg",
               quality
             );
-
           }
-
           tryCompress();
-
         };
-
       img.onerror =
         function(){
-
           URL.revokeObjectURL(
             url
           );
-
           reject(
             new Error(
               "無法讀取圖片"
             )
           );
-
         };
-
       img.src = url;
-
     }
   );
-
 }
-
-
+/* =========================================================
+   照片資料標準化
+========================================================= */
+function normalizePhoto(photo){
+  return {
+    id:
+      photo?.id || null,
+    blob:
+      photo?.blob || null,
+    data:
+      photo?.data || null,
+    url:
+      photo?.url || null,
+    scale:
+      Number(photo?.scale) || 1,
+    x:
+      Number(photo?.x) || 0,
+    y:
+      Number(photo?.y) || 0
+  };
+}
+/* =========================================================
+   取得圖片來源
+========================================================= */
+function getPhotoSource(photo){
+  if(photo.blob){
+    return URL.createObjectURL(
+      photo.blob
+    );
+  }
+  if(photo.data){
+    return photo.data;
+  }
+  if(photo.url){
+    return photo.url;
+  }
+  return null;
+}
 /* =========================================================
    新增照片
 ========================================================= */
-
 document
   .getElementById("photos")
   .addEventListener(
     "change",
     async function(event){
-
       const files =
         Array.from(
           event.target.files
         );
-
       if(!files.length){
         return;
       }
-
       for(
         const file of files
       ){
-
         try{
-
           const blob =
             await compressImage(
               file
             );
-
           currentPhotos.push({
-
             id:null,
-
             blob:blob,
-
-            /* ★ 新照片預設不改變原本顯示 */
-
             scale:1,
-
             x:0,
-
             y:0
-
           });
-
         }catch(error){
-
           console.error(error);
-
           alert(
             "有照片無法讀取，請確認照片格式。"
           );
-
         }
-
       }
-
       event.target.value = "";
-
       showPreview();
-
       renderPhotoEditors();
-
     }
   );
-
-
 /* =========================================================
-   照片縮圖
+   縮圖
 ========================================================= */
-
 function showPreview(){
-
   const list =
     document.getElementById(
       "previewList"
     );
-
   list.innerHTML = "";
-
   currentPhotos.forEach(
     (photo,index)=>{
-
       const item =
         document.createElement(
           "div"
         );
-
       item.className =
         "preview-item";
-
       const img =
         document.createElement(
           "img"
         );
-
-      if(photo.blob){
-
-        img.src =
-          URL.createObjectURL(
-            photo.blob
-          );
-
-      }else if(photo.url){
-
-        img.src =
-          photo.url;
-
-      }else if(photo.data){
-
-        img.src =
-          photo.data;
-
+      const src =
+        getPhotoSource(photo);
+      if(src){
+        img.src = src;
       }
-
       item.appendChild(img);
-
       const button =
         document.createElement(
           "button"
         );
-
       button.innerHTML = "×";
-
       button.onclick =
         function(){
-
           removePhoto(index);
-
         };
-
       item.appendChild(
         button
       );
-
       list.appendChild(
         item
       );
-
     }
   );
-
 }
-
-
 /* =========================================================
    移除照片
 ========================================================= */
-
 function removePhoto(index){
-
   currentPhotos.splice(
     index,
     1
   );
-
   showPreview();
-
   renderPhotoEditors();
-
 }
-
-
 /* =========================================================
-   ★ 每張照片的調整器
+   ★ 照片位置限制
+   保證不會露白
 ========================================================= */
-
-function renderPhotoEditors(){
-
-  const list =
-    document.getElementById(
-      "photoEditList"
+function clampPhotoPosition(
+  photo,
+  frameSize
+){
+  const scale =
+    Math.max(
+      1,
+      Number(photo.scale) || 1
     );
-
-  list.innerHTML = "";
-
-  currentPhotos.forEach(
-    (photo,index)=>{
-
-      const box =
-        document.createElement(
-          "div"
-        );
-
-      box.className =
-        "photo-editor";
-
-
-      const title =
-        document.createElement(
-          "div"
-        );
-
-      title.className =
-        "photo-editor-title";
-
-      title.textContent =
-        `第 ${index + 1} 張照片`;
-
-      box.appendChild(title);
-
-
-      /* 預覽 */
-
-      const preview =
-        document.createElement(
-          "div"
-        );
-
-      preview.className =
-        "adjust-preview";
-
-
-      const img =
-        document.createElement(
-          "img"
-        );
-
-
-      if(photo.blob){
-
-        img.src =
-          URL.createObjectURL(
-            photo.blob
-          );
-
-      }else if(photo.url){
-
-        img.src =
-          photo.url;
-
-      }else if(photo.data){
-
-        img.src =
-          photo.data;
-
-      }
-
-
-      preview.appendChild(img);
-
-      box.appendChild(
-        preview
-      );
-
-
-      const controls =
-        document.createElement(
-          "div"
-        );
-
-      controls.className =
-        "adjust-controls";
-
-
-      /* =====================
-         縮放
-      ===================== */
-
-      const scaleControl =
-        document.createElement(
-          "div"
-        );
-
-      scaleControl.className =
-        "control-item full";
-
-      const scaleLabel =
-        document.createElement(
-          "label"
-        );
-
-      scaleLabel.textContent =
-        "照片縮放";
-
-      const scaleInput =
-        document.createElement(
-          "input"
-        );
-
-      scaleInput.type =
-        "range";
-
-      scaleInput.min =
-        "1";
-
-      scaleInput.max =
-        "2";
-
-      scaleInput.step =
-        ".01";
-
-      scaleInput.value =
-        photo.scale || 1;
-
-      const scaleValue =
-        document.createElement(
-          "div"
-        );
-
-      scaleValue.className =
-        "range-value";
-
-      scaleValue.textContent =
-        Math.round(
-          (photo.scale || 1) *
-          100
-        ) + "%";
-
-
-      scaleInput.oninput =
-        function(){
-
-          photo.scale =
-            Number(
-              this.value
-            );
-
-          scaleValue.textContent =
-            Math.round(
-              photo.scale * 100
-            ) + "%";
-
-          updatePhotoPreview(
-            preview,
-            img,
-            photo
-          );
-
-        };
-
-
-      scaleControl.appendChild(
-        scaleLabel
-      );
-
-      scaleControl.appendChild(
-        scaleInput
-      );
-
-      scaleControl.appendChild(
-        scaleValue
-      );
-
-      controls.appendChild(
-        scaleControl
-      );
-
-
-      /* =====================
-         左右
-      ===================== */
-
-      const xControl =
-        document.createElement(
-          "div"
-        );
-
-      xControl.className =
-        "control-item";
-
-      const xLabel =
-        document.createElement(
-          "label"
-        );
-
-      xLabel.textContent =
-        "左右位置";
-
-      const xInput =
-        document.createElement(
-          "input"
-        );
-
-      xInput.type =
-        "range";
-
-      xInput.min =
-        "-50";
-
-      xInput.max =
-        "50";
-
-      xInput.step =
-        "1";
-
-      xInput.value =
-        photo.x || 0;
-
-      const xValue =
-        document.createElement(
-          "div"
-        );
-
-      xValue.className =
-        "range-value";
-
-      xValue.textContent =
-        `${photo.x || 0}%`;
-
-
-      xInput.oninput =
-        function(){
-
-          photo.x =
-            Number(
-              this.value
-            );
-
-          xValue.textContent =
-            `${photo.x}%`;
-
-          updatePhotoPreview(
-            preview,
-            img,
-            photo
-          );
-
-        };
-
-
-      xControl.appendChild(
-        xLabel
-      );
-
-      xControl.appendChild(
-        xInput
-      );
-
-      xControl.appendChild(
-        xValue
-      );
-
-      controls.appendChild(
-        xControl
-      );
-
-
-      /* =====================
-         上下
-      ===================== */
-
-      const yControl =
-        document.createElement(
-          "div"
-        );
-
-      yControl.className =
-        "control-item";
-
-      const yLabel =
-        document.createElement(
-          "label"
-        );
-
-      yLabel.textContent =
-        "上下位置";
-
-      const yInput =
-        document.createElement(
-          "input"
-        );
-
-      yInput.type =
-        "range";
-
-      yInput.min =
-        "-50";
-
-      yInput.max =
-        "50";
-
-      yInput.step =
-        "1";
-
-      yInput.value =
-        photo.y || 0;
-
-      const yValue =
-        document.createElement(
-          "div"
-        );
-
-      yValue.className =
-        "range-value";
-
-      yValue.textContent =
-        `${photo.y || 0}%`;
-
-
-      yInput.oninput =
-        function(){
-
-          photo.y =
-            Number(
-              this.value
-            );
-
-          yValue.textContent =
-            `${photo.y}%`;
-
-          updatePhotoPreview(
-            preview,
-            img,
-            photo
-          );
-
-        };
-
-
-      yControl.appendChild(
-        yLabel
-      );
-
-      yControl.appendChild(
-        yInput
-      );
-
-      yControl.appendChild(
-        yValue
-      );
-
-      controls.appendChild(
-        yControl
-      );
-
-
-      box.appendChild(
-        controls
-      );
-
-      list.appendChild(
-        box
-      );
-
-
-      updatePhotoPreview(
-        preview,
-        img,
-        photo
-      );
-
-    }
-  );
-
+  /*
+    因為 img 本身使用 object-fit:cover，
+    scale = 1 時已經可以完整覆蓋正方形。
+    scale 越大，可移動範圍越大。
+  */
+  const maxMove =
+    Math.max(
+      0,
+      (scale - 1) *
+      frameSize /
+      2
+    );
+  photo.x =
+    Math.max(
+      -maxMove,
+      Math.min(
+        maxMove,
+        Number(photo.x) || 0
+      )
+    );
+  photo.y =
+    Math.max(
+      -maxMove,
+      Math.min(
+        maxMove,
+        Number(photo.y) || 0
+      )
+    );
 }
-
-
 /* =========================================================
-   更新照片預覽
+   套用照片預覽
 ========================================================= */
-
 function updatePhotoPreview(
   preview,
   img,
   photo
 ){
-
+  const size =
+    preview.clientWidth || 180;
+  clampPhotoPosition(
+    photo,
+    size
+  );
   preview.style.setProperty(
     "--preview-scale",
-    photo.scale || 1
+    Math.max(
+      1,
+      Number(photo.scale) || 1
+    )
   );
-
   preview.style.setProperty(
     "--preview-x",
-    `${photo.x || 0}%`
+    `${photo.x || 0}px`
   );
-
   preview.style.setProperty(
     "--preview-y",
-    `${photo.y || 0}%`
+    `${photo.y || 0}px`
   );
-
 }
-
-
+/* =========================================================
+   ★ 拖曳 + 雙指縮放
+========================================================= */
+function enablePhotoTouch(
+  preview,
+  img,
+  photo
+){
+  const pointers =
+    new Map();
+  let startX = 0;
+  let startY = 0;
+  let startPhotoX = 0;
+  let startPhotoY = 0;
+  let startDistance = 0;
+  let startScale = 1;
+  function distance(a,b){
+    return Math.hypot(
+      a.clientX - b.clientX,
+      a.clientY - b.clientY
+    );
+  }
+  preview.addEventListener(
+    "pointerdown",
+    function(event){
+      event.preventDefault();
+      preview.setPointerCapture(
+        event.pointerId
+      );
+      pointers.set(
+        event.pointerId,
+        event
+      );
+      if(pointers.size === 1){
+        startX =
+          event.clientX;
+        startY =
+          event.clientY;
+        startPhotoX =
+          Number(photo.x) || 0;
+        startPhotoY =
+          Number(photo.y) || 0;
+      }
+      if(pointers.size === 2){
+        const pts =
+          Array.from(
+            pointers.values()
+          );
+        startDistance =
+          distance(
+            pts[0],
+            pts[1]
+          );
+        startScale =
+          Math.max(
+            1,
+            Number(photo.scale) || 1
+          );
+      }
+    },
+    {passive:false}
+  );
+  preview.addEventListener(
+    "pointermove",
+    function(event){
+      if(
+        !pointers.has(
+          event.pointerId
+        )
+      ){
+        return;
+      }
+      event.preventDefault();
+      pointers.set(
+        event.pointerId,
+        event
+      );
+      /* =====================
+         單指拖曳
+      ===================== */
+      if(pointers.size === 1){
+        const dx =
+          event.clientX -
+          startX;
+        const dy =
+          event.clientY -
+          startY;
+        photo.x =
+          startPhotoX + dx;
+        photo.y =
+          startPhotoY + dy;
+        updatePhotoPreview(
+          preview,
+          img,
+          photo
+        );
+        return;
+      }
+      /* =====================
+         雙指縮放
+      ===================== */
+      if(pointers.size >= 2){
+        const pts =
+          Array.from(
+            pointers.values()
+          );
+        const newDistance =
+          distance(
+            pts[0],
+            pts[1]
+          );
+        if(startDistance > 0){
+          const ratio =
+            newDistance /
+            startDistance;
+          photo.scale =
+            Math.max(
+              1,
+              Math.min(
+                3,
+                startScale *
+                ratio
+              )
+            );
+          updatePhotoPreview(
+            preview,
+            img,
+            photo
+          );
+        }
+      }
+    },
+    {passive:false}
+  );
+  preview.addEventListener(
+    "pointerup",
+    function(event){
+      pointers.delete(
+        event.pointerId
+      );
+    }
+  );
+  preview.addEventListener(
+    "pointercancel",
+    function(event){
+      pointers.delete(
+        event.pointerId
+      );
+    }
+  );
+  preview.addEventListener(
+    "wheel",
+    function(event){
+      event.preventDefault();
+      const current =
+        Math.max(
+          1,
+          Number(photo.scale) || 1
+        );
+      photo.scale =
+        Math.max(
+          1,
+          Math.min(
+            3,
+            current +
+            (event.deltaY < 0
+              ? .05
+              : -.05)
+          )
+        );
+      updatePhotoPreview(
+        preview,
+        img,
+        photo
+      );
+      const range =
+        preview
+          .parentElement
+          ?.querySelector(
+            'input[type="range"]'
+          );
+      if(range){
+        range.value =
+          photo.scale;
+      }
+      const value =
+        preview
+          .parentElement
+          ?.querySelector(
+            ".range-value"
+          );
+      if(value){
+        value.textContent =
+          Math.round(
+            photo.scale * 100
+          ) + "%";
+      }
+    },
+    {passive:false}
+  );
+}
+/* =========================================================
+   ★ 每張照片調整器
+========================================================= */
+function renderPhotoEditors(){
+  const list =
+    document.getElementById(
+      "photoEditList"
+    );
+  list.innerHTML = "";
+  currentPhotos.forEach(
+    (photo,index)=>{
+      photo =
+        currentPhotos[index];
+      const box =
+        document.createElement(
+          "div"
+        );
+      box.className =
+        "photo-editor";
+      const title =
+        document.createElement(
+          "div"
+        );
+      title.className =
+        "photo-editor-title";
+      title.textContent =
+        `第 ${index + 1} 張照片`;
+      box.appendChild(title);
+      const dragHelper =
+        document.createElement(
+          "div"
+        );
+      dragHelper.className =
+        "drag-helper";
+      dragHelper.textContent =
+        "☝️ 拖曳照片　　🤏 雙指縮放";
+      box.appendChild(
+        dragHelper
+      );
+      const preview =
+        document.createElement(
+          "div"
+        );
+      preview.className =
+        "adjust-preview";
+      const img =
+        document.createElement(
+          "img"
+        );
+      const src =
+        getPhotoSource(photo);
+      if(src){
+        img.src = src;
+      }
+      preview.appendChild(
+        img
+      );
+      box.appendChild(
+        preview
+      );
+      const controls =
+        document.createElement(
+          "div"
+        );
+      controls.className =
+        "adjust-controls";
+      /* =====================
+         縮放
+      ===================== */
+      const scaleControl =
+        document.createElement(
+          "div"
+        );
+      scaleControl.className =
+        "control-item";
+      const scaleLabel =
+        document.createElement(
+          "label"
+        );
+      scaleLabel.textContent =
+        "照片縮放";
+      const scaleInput =
+        document.createElement(
+          "input"
+        );
+      scaleInput.type =
+        "range";
+      scaleInput.min =
+        "1";
+      scaleInput.max =
+        "3";
+      scaleInput.step =
+        ".01";
+      scaleInput.value =
+        Math.max(
+          1,
+          Number(photo.scale) || 1
+        );
+      const scaleValue =
+        document.createElement(
+          "div"
+        );
+      scaleValue.className =
+        "range-value";
+      scaleValue.textContent =
+        Math.round(
+          (Number(photo.scale) || 1) *
+          100
+        ) + "%";
+      scaleInput.oninput =
+        function(){
+          photo.scale =
+            Math.max(
+              1,
+              Number(
+                this.value
+              )
+            );
+          scaleValue.textContent =
+            Math.round(
+              photo.scale * 100
+            ) + "%";
+          updatePhotoPreview(
+            preview,
+            img,
+            photo
+          );
+        };
+      scaleControl.appendChild(
+        scaleLabel
+      );
+      scaleControl.appendChild(
+        scaleInput
+      );
+      scaleControl.appendChild(
+        scaleValue
+      );
+      controls.appendChild(
+        scaleControl
+      );
+      box.appendChild(
+        controls
+      );
+      list.appendChild(
+        box
+      );
+      updatePhotoPreview(
+        preview,
+        img,
+        photo
+      );
+      enablePhotoTouch(
+        preview,
+        img,
+        photo
+      );
+    }
+  );
+}
 /* =========================================================
    分類
 ========================================================= */
-
 function renderCategories(){
-
   const box =
     document.getElementById(
       "categories"
     );
-
   box.innerHTML = "";
-
-
   areas.forEach(
     area=>{
-
       const button =
         document.createElement(
           "button"
         );
-
       button.textContent =
         area;
-
       if(
         area === currentArea
       ){
-
         button.classList.add(
           "active"
         );
-
       }
-
-
       button.onclick =
         function(){
-
           currentArea =
             area;
-
           renderCategories();
-
           renderCafes();
-
         };
-
-
       box.appendChild(
         button
       );
-
     }
   );
-
-
   const select =
     document.getElementById(
       "area"
     );
-
   select.innerHTML = "";
-
-
   areas
     .filter(
       area=>area !== "全部"
     )
     .forEach(
       area=>{
-
         const option =
           document.createElement(
             "option"
           );
-
         option.value =
           area;
-
         option.textContent =
           area;
-
         select.appendChild(
           option
         );
-
       }
     );
-
 }
-
-
 /* =========================================================
-   ★ 顯示照片
-   舊照片沒有 scale/x/y 時全部使用 1 / 0 / 0
+   顯示咖啡廳
 ========================================================= */
-
 async function renderCafes(){
-
   const list =
     document.getElementById(
       "cafeList"
     );
-
   const keyword =
     document.getElementById(
       "searchInput"
@@ -1867,96 +1537,59 @@ async function renderCafes(){
     .value
     .trim()
     .toLowerCase();
-
-
   const filtered =
     cafes.filter(
       cafe=>{
-
         const areaOK =
           currentArea === "全部" ||
           cafe.area === currentArea;
-
-
         const text = [
-
           cafe.name,
-
           cafe.area,
-
           cafe.address,
-
           cafe.tags,
-
           cafe.description,
-
           cafe.note
-
         ]
         .filter(Boolean)
         .join(" ")
         .toLowerCase();
-
-
         const searchOK =
           !keyword ||
           text.includes(
             keyword
           );
-
-
         return (
           areaOK &&
           searchOK
         );
-
       }
     );
-
-
   if(!filtered.length){
-
     list.innerHTML =
       `
       <div class="empty">
         目前沒有符合的咖啡廳 ♡
       </div>
       `;
-
     return;
-
   }
-
-
   list.innerHTML = "";
-
-
   for(
     const cafe of filtered
   ){
-
     const card =
       document.createElement(
         "div"
       );
-
     card.className =
       "cafe-card";
-
-
-    /* =====================
-       照片區
-    ===================== */
-
     const photoArea =
       document.createElement(
         "div"
       );
-
     photoArea.className =
       "photo-area";
-
-
     const photoSize =
       Math.max(
         100,
@@ -1967,296 +1600,209 @@ async function renderCafes(){
           ) || 260
         )
       );
-
-
     const photoWrap =
       document.createElement(
         "div"
       );
-
     photoWrap.className =
       "photo-wrap";
-
-
     photoWrap.style.setProperty(
       "--photo-size",
       `${photoSize}px`
     );
-
-
     const photo =
       cafe.photos &&
       cafe.photos.length
         ? cafe.photos[0]
         : null;
-
-
     if(photo){
-
       const img =
         document.createElement(
           "img"
         );
-
-
       let src = null;
-
-
-      /* 舊格式 */
-
       if(photo.data){
-
         src =
           photo.data;
-
       }else if(photo.url){
-
         src =
           photo.url;
-
       }
-
-
-      /* IndexedDB 格式 */
-
       if(
         !src &&
         photo.id &&
         db
       ){
-
         try{
-
           const blob =
             await getImageBlob(
               photo.id
             );
-
           if(blob){
-
             src =
               URL.createObjectURL(
                 blob
               );
-
           }
-
         }catch(error){
-
           console.error(
             error
           );
-
         }
-
       }
-
-
       if(src){
-
         img.src =
           src;
-
       }
-
-
-      /* ★ 舊照片沒有設定時，不改變它 */
-
+      /*
+        ★ 保留舊資料
+        舊照片沒有位置資料就維持原本 1 / 0 / 0
+      */
+      const photoData =
+        normalizePhoto(
+          photo
+        );
+      /*
+        卡片顯示時，
+        x/y 仍然使用舊資料，
+        同時限制不能露白。
+      */
+      clampPhotoPosition(
+        photoData,
+        photoSize
+      );
       img.style.setProperty(
         "--photo-scale",
-        photo.scale || 1
+        Math.max(
+          1,
+          photoData.scale
+        )
       );
-
       img.style.setProperty(
         "--photo-x",
-        `${photo.x || 0}%`
+        `${photoData.x}px`
       );
-
       img.style.setProperty(
         "--photo-y",
-        `${photo.y || 0}%`
+        `${photoData.y}px`
       );
-
-
       photoWrap.appendChild(
         img
       );
-
-
     }else{
-
       const placeholder =
         document.createElement(
           "div"
         );
-
       placeholder.className =
         "photo-placeholder";
-
       placeholder.textContent =
         "尚未上傳照片";
-
       photoWrap.appendChild(
         placeholder
       );
-
     }
-
-
     photoArea.appendChild(
       photoWrap
     );
-
-
     if(
       cafe.photos &&
       cafe.photos.length > 1
     ){
-
       const count =
         document.createElement(
           "div"
         );
-
       count.className =
         "photo-count";
-
       count.textContent =
         `${cafe.photos.length} 張照片`;
-
       photoArea.appendChild(
         count
       );
-
     }
-
-
     card.appendChild(
       photoArea
     );
-
-
     /* =====================
        內容
     ===================== */
-
     const content =
       document.createElement(
         "div"
       );
-
     content.className =
       "card-content";
-
-
     const top =
       document.createElement(
         "div"
       );
-
     top.className =
       "card-top";
-
-
     const title =
       document.createElement(
         "h2"
       );
-
     title.className =
       "card-title";
-
     title.textContent =
       cafe.name || "";
-
-
     top.appendChild(
       title
     );
-
-
     const favorite =
       document.createElement(
         "button"
       );
-
     favorite.className =
       "favorite";
-
     favorite.innerHTML =
       cafe.favorite
         ? "♥"
         : "♡";
-
-
     favorite.onclick =
       function(){
-
         toggleFavorite(
           cafe.id
         );
-
       };
-
-
     top.appendChild(
       favorite
     );
-
-
     content.appendChild(
       top
     );
-
-
-    /* 地址 */
-
     if(
       cafe.area ||
       cafe.address
     ){
-
       const meta =
         document.createElement(
           "div"
         );
-
       meta.className =
         "meta";
-
       meta.textContent =
         `${cafe.area || ""}${
           cafe.address
             ? " ・ " + cafe.address
             : ""
         }`;
-
       content.appendChild(
         meta
       );
-
     }
-
-
-    /* Tags */
-
     const tagText =
       Array.isArray(cafe.tags)
         ? cafe.tags.join(",")
         : cafe.tags || "";
-
-
     if(tagText){
-
       const tags =
         document.createElement(
           "div"
         );
-
       tags.className =
         "tags";
-
-
       tagText
         .split(",")
         .map(
@@ -2265,336 +1811,219 @@ async function renderCafes(){
         .filter(Boolean)
         .forEach(
           tagText=>{
-
             const tag =
               document.createElement(
                 "span"
               );
-
             tag.className =
               "tag";
-
             tag.textContent =
               tagText;
-
             tags.appendChild(
               tag
             );
-
           }
         );
-
-
       content.appendChild(
         tags
       );
-
     }
-
-
-    /* 備注 */
-
     const description =
       cafe.description ||
       cafe.desc ||
       cafe.note ||
       "";
-
-
     if(description){
-
       const descriptionBox =
         document.createElement(
           "div"
         );
-
       descriptionBox.className =
         "description-box";
-
-
       const descriptionTitle =
         document.createElement(
           "div"
         );
-
       descriptionTitle.className =
         "description-title";
-
       descriptionTitle.textContent =
         "備注";
-
-
       const descriptionText =
         document.createElement(
           "div"
         );
-
       descriptionText.className =
         "description";
-
       descriptionText.textContent =
         description;
-
-
       descriptionBox.appendChild(
         descriptionTitle
       );
-
       descriptionBox.appendChild(
         descriptionText
       );
-
-
       content.appendChild(
         descriptionBox
       );
-
     }
-
-
-    /* =====================
-       按鈕
-    ===================== */
-
     const actions =
       document.createElement(
         "div"
       );
-
     actions.className =
       "card-actions";
-
-
     if(cafe.address){
-
       const mapButton =
         document.createElement(
           "button"
         );
-
       mapButton.className =
         "map";
-
       mapButton.textContent =
         "📍 地圖";
-
       mapButton.onclick =
         function(){
-
           openMap(
             cafe.address
           );
-
         };
-
       actions.appendChild(
         mapButton
       );
-
     }
-
-
     if(
       cafe.instagram ||
       cafe.ig
     ){
-
       const igButton =
         document.createElement(
           "button"
         );
-
       igButton.textContent =
         "Instagram";
-
       igButton.onclick =
         function(){
-
           let url =
             cafe.instagram ||
             cafe.ig;
-
           if(
             !/^https?:\/\//i.test(
               url
             )
           ){
-
             url =
               "https://" +
               url;
-
           }
-
           window.open(
             url,
             "_blank"
           );
-
         };
-
       actions.appendChild(
         igButton
       );
-
     }
-
-
     const editButton =
       document.createElement(
         "button"
       );
-
     editButton.textContent =
       "編輯";
-
     editButton.onclick =
       function(){
-
         editCafe(
           cafe.id
         );
-
       };
-
-
     actions.appendChild(
       editButton
     );
-
-
     const deleteButton =
       document.createElement(
         "button"
       );
-
     deleteButton.textContent =
       "刪除";
-
     deleteButton.onclick =
       function(){
-
         deleteCafeById(
           cafe.id
         );
-
       };
-
-
     actions.appendChild(
       deleteButton
     );
-
-
     content.appendChild(
       actions
     );
-
-
     card.appendChild(
       content
     );
-
-
     list.appendChild(
       card
     );
-
   }
-
 }
-
-
 /* =========================================================
    新增 / 編輯
 ========================================================= */
-
 async function openModal(id=null){
-
   editingId =
     id;
-
   currentPhotos = [];
-
-
   document
     .getElementById("modal")
     .classList.add("show");
-
-
   document
     .getElementById("modalTitle")
     .textContent =
       id
         ? "編輯咖啡廳"
         : "新增咖啡廳";
-
-
   document
     .getElementById("deleteBtn")
     .style.display =
       id
         ? "block"
         : "none";
-
-
   if(id){
-
     const cafe =
       cafes.find(
         cafe=>cafe.id === id
       );
-
-
     if(!cafe){
-
       closeModal();
-
       return;
-
     }
-
-
     document
       .getElementById("name")
       .value =
         cafe.name || "";
-
-
     document
       .getElementById("area")
       .value =
         cafe.area ||
         cafe.district ||
         areas[1];
-
-
     document
       .getElementById("address")
       .value =
         cafe.address || "";
-
-
     document
       .getElementById("instagram")
       .value =
         cafe.instagram ||
         cafe.ig ||
         "";
-
-
     const tags =
       Array.isArray(cafe.tags)
         ? cafe.tags.join(",")
         : cafe.tags || "";
-
-
     document
       .getElementById("tags")
       .value =
         tags;
-
-
     document
       .getElementById("description")
       .value =
@@ -2602,260 +2031,159 @@ async function openModal(id=null){
         cafe.desc ||
         cafe.note ||
         "";
-
-
     document
       .getElementById("imageHeight")
       .value =
         cafe.imageHeight ||
         260;
-
-
-    /* =====================
-       載入原本照片
-    ===================== */
-
     if(
       Array.isArray(
         cafe.photos
       )
     ){
-
       for(
         const photo of cafe.photos
       ){
-
-        /* IndexedDB */
-
         if(
           photo.id &&
           db
         ){
-
           try{
-
             const blob =
               await getImageBlob(
                 photo.id
               );
-
             if(blob){
-
               currentPhotos.push({
-
                 id:photo.id,
-
                 blob:blob,
-
-                /*
-                 ★ 舊照片沒有這些值
-                 就自動維持原本位置
-                */
-
                 scale:
                   Number(
                     photo.scale
                   ) || 1,
-
                 x:
                   Number(
                     photo.x
                   ) || 0,
-
                 y:
                   Number(
                     photo.y
                   ) || 0
-
               });
-
             }
-
           }catch(error){
-
             console.error(
               error
             );
-
           }
-
         }else{
-
-          /* 舊 Base64 */
-
           currentPhotos.push({
-
             id:null,
-
             data:
               photo.data ||
               null,
-
             url:
               photo.url ||
               null,
-
             scale:
               Number(
                 photo.scale
               ) || 1,
-
             x:
               Number(
                 photo.x
               ) || 0,
-
             y:
               Number(
                 photo.y
               ) || 0
-
           });
-
         }
-
       }
-
     }
-
-
   }else{
-
     document
       .getElementById("name")
       .value = "";
-
-
     document
       .getElementById("area")
       .value =
         areas[1];
-
-
     document
       .getElementById("address")
       .value = "";
-
-
     document
       .getElementById("instagram")
       .value = "";
-
-
     document
       .getElementById("tags")
       .value = "";
-
-
     document
       .getElementById("description")
       .value = "";
-
-
     document
       .getElementById("imageHeight")
       .value =
         260;
-
   }
-
-
   showPreview();
-
   renderPhotoEditors();
-
 }
-
-
 /* =========================================================
    關閉
 ========================================================= */
-
 function closeModal(){
-
   document
     .getElementById("modal")
     .classList.remove(
       "show"
     );
-
   editingId = null;
-
   currentPhotos = [];
-
 }
-
-
 /* =========================================================
    編輯
 ========================================================= */
-
 function editCafe(id){
-
   openModal(id);
-
 }
-
-
 /* =========================================================
    儲存照片
 ========================================================= */
-
 async function saveCurrentPhotos(
   cafeId
 ){
-
   const refs = [];
-
-
   for(
     let i=0;
     i<currentPhotos.length;
     i++
   ){
-
     const photo =
       currentPhotos[i];
-
-
-    /* 已經存在 IndexedDB */
-
     if(
       photo.id &&
       photo.blob
     ){
-
       await saveImageBlob(
         photo.id,
         photo.blob
       );
-
-
       refs.push({
-
         id:photo.id,
-
         scale:
-          photo.scale || 1,
-
+          Math.max(
+            1,
+            photo.scale || 1
+          ),
         x:
           photo.x || 0,
-
         y:
           photo.y || 0
-
       });
-
-
       continue;
-
     }
-
-
-    /* 新照片 */
-
     if(photo.blob){
-
       const imageId =
         cafeId +
         "_" +
@@ -2866,50 +2194,32 @@ async function saveCurrentPhotos(
         Math.random()
           .toString(36)
           .slice(2,8);
-
-
       await saveImageBlob(
         imageId,
         photo.blob
       );
-
-
       refs.push({
-
         id:imageId,
-
         scale:
-          photo.scale || 1,
-
+          Math.max(
+            1,
+            photo.scale || 1
+          ),
         x:
           photo.x || 0,
-
         y:
           photo.y || 0
-
       });
-
-
       continue;
-
     }
-
-
-    /* 舊 Base64 */
-
     if(photo.data){
-
       try{
-
         const response =
           await fetch(
             photo.data
           );
-
         const blob =
           await response.blob();
-
-
         const imageId =
           cafeId +
           "_" +
@@ -2920,105 +2230,69 @@ async function saveCurrentPhotos(
           Math.random()
             .toString(36)
             .slice(2,8);
-
-
         await saveImageBlob(
           imageId,
           blob
         );
-
-
         refs.push({
-
           id:imageId,
-
           scale:
-            photo.scale || 1,
-
+            Math.max(
+              1,
+              photo.scale || 1
+            ),
           x:
             photo.x || 0,
-
           y:
             photo.y || 0
-
         });
-
       }catch(error){
-
         console.error(
           error
         );
-
       }
-
     }
-
   }
-
-
   return refs;
-
 }
-
-
 /* =========================================================
-   ★ 儲存咖啡廳
-   不換 STORAGE_KEY
+   儲存咖啡廳
 ========================================================= */
-
 async function saveCafe(){
-
   const name =
     document
       .getElementById("name")
       .value
       .trim();
-
-
   if(!name){
-
     alert(
       "請輸入店名"
     );
-
     return;
-
   }
-
-
   const area =
     document
       .getElementById("area")
       .value;
-
-
   const address =
     document
       .getElementById("address")
       .value
       .trim();
-
-
   const instagram =
     document
       .getElementById("instagram")
       .value
       .trim();
-
-
   const tags =
     document
       .getElementById("tags")
       .value
       .trim();
-
-
   const description =
     document
       .getElementById("description")
       .value;
-
-
   const imageHeight =
     Math.max(
       100,
@@ -3033,341 +2307,200 @@ async function saveCafe(){
         ) || 260
       )
     );
-
-
-  /* 編輯原本店家 */
-
   if(editingId){
-
     const cafe =
       cafes.find(
         cafe=>
           cafe.id ===
           editingId
       );
-
-
     if(!cafe){
-
       alert(
         "找不到這間咖啡廳"
       );
-
       return;
-
     }
-
-
-    /*
-      ★ 直接修改原本物件
-      不重新建立資料
-      不會把原本欄位弄掉
-    */
-
     cafe.name =
       name;
-
     cafe.area =
       area;
-
     cafe.address =
       address;
-
     cafe.instagram =
       instagram;
-
     cafe.tags =
       tags;
-
     cafe.description =
       description;
-
     cafe.imageHeight =
       imageHeight;
-
-
-    /*
-      ★ 收藏狀態完全保留
-    */
-
-
     if(
       currentPhotos.length ||
       Array.isArray(
         cafe.photos
       )
     ){
-
       cafe.photos =
         await saveCurrentPhotos(
           cafe.id
         );
-
     }
-
-
   }else{
-
-    /* 新增 */
-
     const cafeId =
       Date.now() +
       "_" +
       Math.random()
         .toString(36)
         .slice(2,8);
-
-
     const photoRefs =
       await saveCurrentPhotos(
         cafeId
       );
-
-
     cafes.unshift({
-
       id:cafeId,
-
       name:name,
-
       area:area,
-
       address:address,
-
       instagram:instagram,
-
       tags:tags,
-
       description:description,
-
       imageHeight:imageHeight,
-
       photos:photoRefs,
-
       favorite:false
-
     });
-
   }
-
-
-  /*
-    ★ 仍然使用原本 myCafeGuide
-  */
-
   localStorage.setItem(
     STORAGE_KEY,
     JSON.stringify(
       cafes
     )
   );
-
-
   closeModal();
-
   renderCafes();
-
 }
-
-
 /* =========================================================
    刪除
 ========================================================= */
-
 async function deleteCafe(){
-
   if(!editingId){
     return;
   }
-
   await deleteCafeById(
     editingId
   );
-
 }
-
-
 async function deleteCafeById(
   id
 ){
-
   const cafe =
     cafes.find(
       cafe=>cafe.id === id
     );
-
-
   if(!cafe){
     return;
   }
-
-
   const ok =
     confirm(
       `確定要刪除「${cafe.name}」嗎？`
     );
-
-
   if(!ok){
     return;
   }
-
-
-  /*
-    刪除 IndexedDB 照片
-  */
-
   if(
     Array.isArray(
       cafe.photos
     )
   ){
-
     for(
       const photo of cafe.photos
     ){
-
       if(photo.id){
-
         try{
-
           await deleteImageBlob(
             photo.id
           );
-
         }catch(error){
-
           console.error(
             error
           );
-
         }
-
       }
-
     }
-
   }
-
-
   cafes =
     cafes.filter(
       cafe=>
         cafe.id !== id
     );
-
-
   localStorage.setItem(
     STORAGE_KEY,
     JSON.stringify(
       cafes
     )
   );
-
-
   closeModal();
-
   renderCafes();
-
 }
-
-
 /* =========================================================
    收藏
 ========================================================= */
-
 function toggleFavorite(id){
-
   const cafe =
     cafes.find(
       cafe=>cafe.id === id
     );
-
-
   if(!cafe){
     return;
   }
-
-
-  /*
-    支援舊版 favorite / fav
-  */
-
   if(
     typeof cafe.favorite ===
     "boolean"
   ){
-
     cafe.favorite =
       !cafe.favorite;
-
   }else if(
     typeof cafe.fav ===
     "boolean"
   ){
-
     cafe.fav =
       !cafe.fav;
-
   }else{
-
     cafe.favorite =
       true;
-
   }
-
-
   localStorage.setItem(
     STORAGE_KEY,
     JSON.stringify(
       cafes
     )
   );
-
-
   renderCafes();
-
 }
-
-
 /* =========================================================
    Google Maps
 ========================================================= */
-
 function openMap(
   address
 ){
-
   if(!address){
-
     alert(
       "這家店還沒有地址"
     );
-
     return;
-
   }
-
-
   const url =
     "https://www.google.com/maps/search/?api=1&query=" +
     encodeURIComponent(
       address
     );
-
-
   window.open(
     url,
     "_blank"
   );
-
 }
-
-
 /* =========================================================
    搜尋
 ========================================================= */
-
 document
   .getElementById(
     "searchInput"
@@ -3375,68 +2508,43 @@ document
   .addEventListener(
     "input",
     function(){
-
       renderCafes();
-
     }
   );
-
-
 /* =========================================================
    點背景關閉
 ========================================================= */
-
 document
   .getElementById("modal")
   .addEventListener(
     "click",
     function(event){
-
       if(
         event.target ===
         this
       ){
-
         closeModal();
-
       }
-
     }
   );
-
-
 /* =========================================================
    初始化
 ========================================================= */
-
 (async function(){
-
   try{
-
     await initDB();
-
   }catch(error){
-
     console.error(
       "IndexedDB 初始化失敗",
       error
     );
-
   }
-
-
   renderCategories();
-
   renderCafes();
-
 })();
-
 </script>
-
-<!-- HEIC / HEIF 支援 -->
 <script
   src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js">
 </script>
-
 </body>
 </html>
