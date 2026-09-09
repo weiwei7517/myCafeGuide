@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MY CAFE GUIDE｜台中咖啡廳</title>
 
-<script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
-
 <style>
 *{
   box-sizing:border-box;
@@ -14,127 +12,149 @@
 
 body{
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;
   background:#f7f6f3;
   color:#333;
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang TC","Noto Sans TC",Arial,sans-serif;
 }
 
 header{
-  padding:35px 20px 25px;
-  text-align:center;
   background:#fff;
-  border-bottom:1px solid #e8e6e1;
+  padding:28px 20px 22px;
+  text-align:center;
+  border-bottom:1px solid #eee;
 }
 
 header h1{
   margin:0;
-  font-size:25px;
+  font-size:20px;
   letter-spacing:2px;
   font-weight:600;
 }
 
-header p{
-  margin:8px 0 0;
-  color:#777;
-  font-size:14px;
+header .sub{
+  margin-top:7px;
+  font-size:15px;
+  letter-spacing:2px;
 }
 
-.container{
-  max-width:1000px;
+header .small{
+  margin-top:8px;
+  font-size:12px;
+  color:#999;
+}
+
+.top-area{
+  padding:15px;
+  max-width:900px;
   margin:auto;
-  padding:20px;
 }
 
-.toolbar{
+.search-box{
   display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:15px;
+  gap:8px;
+  margin-bottom:12px;
 }
 
-input,
-select,
-textarea{
-  width:100%;
-  padding:11px 13px;
+.search-box input{
+  flex:1;
   border:1px solid #ddd;
   border-radius:10px;
-  background:#fff;
+  padding:12px 14px;
   font-size:14px;
   outline:none;
-  font-family:inherit;
+  background:#fff;
 }
 
-textarea{
-  resize:vertical;
-  line-height:1.7;
-}
-
-.search{
-  flex:1;
-  min-width:200px;
-}
-
-button{
+.add-btn{
   border:0;
-  border-radius:10px;
-  padding:10px 15px;
   background:#333;
   color:#fff;
-  cursor:pointer;
+  border-radius:10px;
+  padding:0 16px;
   font-size:14px;
-  font-family:inherit;
 }
 
-button:hover{
-  opacity:.85;
-}
-
-.category{
+.categories{
   display:flex;
   gap:7px;
   overflow-x:auto;
-  padding-bottom:10px;
-  margin-bottom:20px;
+  padding-bottom:5px;
 }
 
-.category button{
+.categories button{
   flex:none;
-  background:#fff;
-  color:#555;
   border:1px solid #ddd;
+  background:#fff;
+  color:#666;
+  border-radius:20px;
+  padding:8px 13px;
+  font-size:13px;
 }
 
-.category button.active{
+.categories button.active{
   background:#333;
   color:#fff;
+  border-color:#333;
 }
 
-.cafe-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:18px;
+#cafeList{
+  max-width:900px;
+  margin:0 auto;
+  padding:0 15px 40px;
 }
 
-.card{
+.cafe-card{
   background:#fff;
-  border-radius:16px;
+  border-radius:15px;
   overflow:hidden;
-  box-shadow:0 3px 15px rgba(0,0,0,.05);
+  margin-bottom:18px;
+  box-shadow:0 2px 10px rgba(0,0,0,.04);
 }
 
+.photo-area{
+  background:#eee;
+  position:relative;
+  overflow:hidden;
+}
+
+/* ★ 固定 1:1，但大小可以調整 */
 .photo-wrap{
-  width:100%;
+  width:min(var(--photo-size),100%);
+  aspect-ratio:1 / 1;
+  margin:0 auto;
   position:relative;
   overflow:hidden;
   background:#eee;
 }
 
 .photo-wrap img{
+  position:absolute;
   width:100%;
   height:100%;
+  max-width:none;
   object-fit:cover;
-  display:block;
+
+  /*
+    下面三個值會由每張照片自己的設定控制
+  */
+  transform:
+    translate(
+      var(--photo-x, 0%),
+      var(--photo-y, 0%)
+    )
+    scale(var(--photo-scale, 1));
+
+  transform-origin:center center;
+}
+
+.photo-placeholder{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#aaa;
+  font-size:13px;
 }
 
 .photo-count{
@@ -145,151 +165,275 @@ button:hover{
   color:#fff;
   padding:5px 9px;
   border-radius:20px;
-  font-size:12px;
+  font-size:11px;
 }
 
 .card-content{
   padding:16px;
 }
 
-.card h3{
-  margin:0 0 6px;
-  font-size:19px;
-  line-height:1.4;
+.card-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
 }
 
-.area{
+.card-title{
+  font-size:18px;
+  font-weight:600;
+  margin:0;
+}
+
+.favorite{
+  border:0;
+  background:none;
+  font-size:23px;
+  padding:0;
+  line-height:1;
+}
+
+.meta{
+  margin-top:8px;
   color:#888;
   font-size:13px;
-  margin-bottom:8px;
-}
-
-.address{
-  font-size:13px;
-  color:#777;
-  line-height:1.6;
-  margin-bottom:10px;
-}
-
-.description-box{
-  margin-top:10px;
-  padding-top:10px;
-  border-top:1px solid #eee;
-}
-
-.description-title{
-  font-size:13px;
-  color:#888;
-  margin-bottom:5px;
-  line-height:1.5;
-}
-
-.description{
-  font-size:14px;
-  line-height:1.75;
-  color:#555;
-  white-space:pre-wrap;
-  word-break:break-word;
+  line-height:1.7;
 }
 
 .tags{
   display:flex;
   flex-wrap:wrap;
   gap:6px;
-  margin-top:11px;
+  margin-top:10px;
 }
 
 .tag{
-  background:#f1f0ed;
+  background:#f2f1ee;
   color:#666;
   padding:5px 9px;
   border-radius:20px;
-  font-size:12px;
+  font-size:11px;
 }
 
-.actions{
+.description-box{
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid #eee;
+}
+
+.description-title{
+  font-size:12px;
+  color:#999;
+  margin-bottom:5px;
+}
+
+.description{
+  font-size:14px;
+  color:#555;
+  line-height:1.75;
+  white-space:pre-wrap;
+  word-break:break-word;
+}
+
+.card-actions{
   display:flex;
-  gap:7px;
+  gap:8px;
   margin-top:14px;
-  flex-wrap:wrap;
 }
 
-.actions a,
-.actions button{
-  text-decoration:none;
+.card-actions button{
+  flex:1;
+  border:1px solid #ddd;
+  background:#fff;
+  border-radius:9px;
+  padding:9px 5px;
   font-size:12px;
-  padding:8px 10px;
-  border-radius:8px;
+  color:#555;
 }
 
-.map-btn{
+.card-actions button.map{
   background:#333;
   color:#fff;
-}
-
-.ig-btn{
-  background:#f1f0ed;
-  color:#333;
-}
-
-.edit-btn{
-  background:#eee;
-  color:#333;
-}
-
-.delete-btn{
-  background:#eee;
-  color:#a33;
-}
-
-.favorite{
-  float:right;
-  cursor:pointer;
-  font-size:22px;
-  line-height:1;
+  border-color:#333;
 }
 
 .empty{
   text-align:center;
-  color:#999;
-  padding:50px 20px;
+  color:#aaa;
+  padding:60px 20px;
+  font-size:14px;
 }
 
+/* Modal */
 .modal{
-  display:none;
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
   z-index:999;
-  padding:20px;
-  overflow:auto;
+}
+
+.modal.show{
+  display:flex;
 }
 
 .modal-box{
   background:#fff;
-  max-width:600px;
-  margin:40px auto;
-  border-radius:18px;
-  padding:22px;
+  width:100%;
+  max-width:620px;
+  max-height:90vh;
+  overflow-y:auto;
+  border-radius:16px;
+  padding:20px;
 }
 
-.modal-box h2{
-  margin-top:0;
-  margin-bottom:20px;
+.modal-title{
+  font-size:18px;
+  font-weight:600;
+  margin-bottom:18px;
 }
 
 .form-group{
-  margin-bottom:15px;
+  margin-bottom:14px;
 }
 
 .form-group label{
   display:block;
   font-size:13px;
+  color:#555;
   margin-bottom:7px;
-  color:#666;
 }
 
-.preview{
+.form-group input,
+.form-group textarea,
+.form-group select{
+  width:100%;
+  border:1px solid #ddd;
+  border-radius:9px;
+  padding:11px 12px;
+  font-size:14px;
+  outline:none;
+  background:#fff;
+}
+
+.form-group textarea{
+  min-height:110px;
+  resize:vertical;
+  line-height:1.7;
+}
+
+/* ★ 照片大小 */
+.image-size-box{
+  background:#f7f6f3;
+  padding:12px;
+  border-radius:10px;
+}
+
+.image-size-box input{
+  margin-top:5px;
+}
+
+.helper{
+  font-size:11px;
+  color:#999;
+  margin-top:6px;
+  line-height:1.6;
+}
+
+/* ★ 照片調整區 */
+.photo-edit-list{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.photo-editor{
+  border:1px solid #eee;
+  border-radius:12px;
+  padding:12px;
+  background:#fafafa;
+}
+
+.photo-editor-title{
+  font-size:12px;
+  color:#777;
+  margin-bottom:10px;
+}
+
+.adjust-preview{
+  width:180px;
+  height:180px;
+  margin:0 auto 12px;
+  position:relative;
+  overflow:hidden;
+  background:#eee;
+  border-radius:8px;
+}
+
+.adjust-preview img{
+  position:absolute;
+  width:100%;
+  height:100%;
+  max-width:none;
+  object-fit:cover;
+  transform:
+    translate(
+      var(--preview-x, 0%),
+      var(--preview-y, 0%)
+    )
+    scale(var(--preview-scale, 1));
+  transform-origin:center center;
+}
+
+.adjust-controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.control-item{
+  background:#fff;
+  border-radius:9px;
+  padding:9px;
+}
+
+.control-item.full{
+  grid-column:1 / -1;
+}
+
+.control-item label{
+  font-size:11px;
+  color:#777;
+  display:block;
+  margin-bottom:5px;
+}
+
+.control-item input[type="range"]{
+  width:100%;
+}
+
+.range-value{
+  text-align:center;
+  font-size:11px;
+  color:#999;
+  margin-top:3px;
+}
+
+.remove-photo{
+  width:100%;
+  margin-top:10px;
+  border:1px solid #ddd;
+  background:#fff;
+  color:#888;
+  border-radius:8px;
+  padding:8px;
+  font-size:12px;
+}
+
+.preview-list{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
@@ -297,12 +441,12 @@ button:hover{
 }
 
 .preview-item{
+  position:relative;
   width:90px;
   height:90px;
   border-radius:8px;
   overflow:hidden;
   background:#eee;
-  position:relative;
 }
 
 .preview-item img{
@@ -311,81 +455,49 @@ button:hover{
   object-fit:cover;
 }
 
-.remove-photo{
+.preview-item button{
   position:absolute;
-  right:3px;
-  top:3px;
-  width:23px;
-  height:23px;
-  padding:0;
+  right:4px;
+  top:4px;
+  width:22px;
+  height:22px;
+  border:0;
   border-radius:50%;
-  background:rgba(0,0,0,.65);
+  background:rgba(0,0,0,.6);
   color:#fff;
-  line-height:23px;
-  text-align:center;
-  font-size:16px;
-}
-
-.image-size-box{
-  background:#f7f6f3;
-  padding:12px;
-  border-radius:10px;
-  margin-top:8px;
-}
-
-.image-size-box label{
-  margin-bottom:7px;
-}
-
-.image-size-box small{
-  display:block;
-  color:#888;
-  margin-top:7px;
-  line-height:1.5;
-}
-
-.photo-status{
-  margin-top:8px;
-  color:#888;
   font-size:12px;
-  line-height:1.6;
 }
 
 .modal-actions{
   display:flex;
-  gap:10px;
+  gap:8px;
   margin-top:20px;
 }
 
 .modal-actions button{
   flex:1;
+  border:1px solid #ddd;
+  background:#fff;
+  padding:11px;
+  border-radius:9px;
+  font-size:14px;
 }
 
-.cancel{
-  background:#eee;
-  color:#333;
+.modal-actions .save{
+  background:#333;
+  color:#fff;
+  border-color:#333;
 }
 
-.loading{
-  text-align:center;
-  padding:40px 20px;
-  color:#999;
+.delete-btn{
+  color:#b44 !important;
 }
 
 @media(max-width:600px){
-
-  .container{
-    padding:15px;
+  .adjust-preview{
+    width:160px;
+    height:160px;
   }
-
-  .cafe-grid{
-    grid-template-columns:1fr;
-  }
-
-  .modal-box{
-    margin:15px auto;
-  }
-
 }
 </style>
 </head>
@@ -394,191 +506,109 @@ button:hover{
 
 <header>
   <h1>MY CAFE GUIDE</h1>
-  <p>台中咖啡廳</p>
-  <p>慢慢喝一杯，找到喜歡的地方 ♡</p>
+  <div class="sub">台中咖啡廳</div>
+  <div class="small">慢慢喝一杯，找到喜歡的地方 ♡</div>
 </header>
 
-<div class="container">
-
-  <div class="toolbar">
-
-    <input
-      id="searchInput"
-      class="search"
-      type="search"
-      placeholder="搜尋咖啡廳、地址、特色..."
-    >
-
-    <button onclick="openModal()">
-      ＋ 新增咖啡廳
-    </button>
-
+<div class="top-area">
+  <div class="search-box">
+    <input id="searchInput" type="text" placeholder="搜尋咖啡廳、地址、特色...">
+    <button class="add-btn" onclick="openModal()">＋ 新增</button>
   </div>
 
-  <div
-    class="category"
-    id="category"
-  ></div>
-
-  <div
-    id="cafeGrid"
-    class="cafe-grid"
-  ></div>
-
+  <div class="categories" id="categories"></div>
 </div>
 
+<div id="cafeList"></div>
 
-<div
-  class="modal"
-  id="modal"
->
-
+<!-- Modal -->
+<div class="modal" id="modal">
   <div class="modal-box">
 
-    <h2 id="modalTitle">
-      新增咖啡廳
-    </h2>
-
+    <div class="modal-title" id="modalTitle">新增咖啡廳</div>
 
     <div class="form-group">
-
-      <label>咖啡廳名稱</label>
-
-      <input
-        id="name"
-        placeholder="例如：某某咖啡"
-      >
-
+      <label>店名</label>
+      <input id="name" type="text" placeholder="例如：某某咖啡">
     </div>
 
-
     <div class="form-group">
-
       <label>區域</label>
-
       <select id="area"></select>
-
     </div>
 
-
     <div class="form-group">
-
       <label>地址</label>
-
-      <input
-        id="address"
-        placeholder="輸入完整地址"
-      >
-
+      <input id="address" type="text" placeholder="輸入地址">
     </div>
-
 
     <div class="form-group">
-
-      <label>Instagram 連結</label>
-
-      <input
-        id="instagram"
-        type="url"
-        placeholder="https://www.instagram.com/"
-      >
-
+      <label>Instagram</label>
+      <input id="instagram" type="text" placeholder="Instagram 網址">
     </div>
-
 
     <div class="form-group">
-
-      <label>照片（可一次選擇多張）</label>
-
-      <input
-        id="photos"
-        type="file"
-        accept="image/*,.heic,.heif"
-        multiple
-      >
-
-      <div
-        id="photoStatus"
-        class="photo-status"
-      ></div>
-
-      <div
-        id="preview"
-        class="preview"
-      ></div>
-
+      <label>特色／標籤</label>
+      <input id="tags" type="text" placeholder="例如：不限時, 有插座, 寵物友善">
     </div>
-
-
-    <div class="form-group image-size-box">
-
-      <label>照片大小</label>
-
-      <input
-        id="imageHeight"
-        type="number"
-        min="100"
-        max="600"
-        value="260"
-      >
-
-      <small>
-        照片會固定顯示為 1:1 正方形，例如輸入 300 就會顯示 300 × 300。
-      </small>
-
-    </div>
-
 
     <div class="form-group">
+      <label>照片</label>
+      <input id="photos" type="file" accept="image/*,.heic,.heif" multiple>
+      <div class="helper">
+        可以一次選很多張照片，系統會自動壓縮。
+      </div>
+      <div class="preview-list" id="previewList"></div>
+    </div>
 
+    <div class="form-group">
+      <label>照片大小（1:1）</label>
+
+      <div class="image-size-box">
+        <input
+          id="imageHeight"
+          type="number"
+          min="100"
+          max="600"
+          value="260"
+        >
+
+        <div class="helper">
+          照片會固定顯示為 1:1 正方形。<br>
+          例如輸入 300，就是 300 × 300。<br>
+          照片大小只控制正方形顯示尺寸，不會改變照片比例。
+        </div>
+      </div>
+    </div>
+
+    <!-- ★ 每張照片的位置與縮放 -->
+    <div class="form-group">
+      <label>調整照片位置</label>
+
+      <div class="helper" style="margin-bottom:10px;">
+        每張照片可以個別調整。<br>
+        如果食物在下面，就把「上下位置」往上調；也可以調整縮放。
+      </div>
+
+      <div class="photo-edit-list" id="photoEditList"></div>
+    </div>
+
+    <!-- 備注 -->
+    <div class="form-group">
       <label>備注</label>
-
-      <textarea
-        id="description"
-        rows="5"
-        placeholder="例如：不限時、有插座、寵物友善、主推布丁..."
-      ></textarea>
-
+      <textarea id="description" placeholder="輸入咖啡廳備注..."></textarea>
     </div>
-
-
-    <div class="form-group">
-
-      <label>特色標籤</label>
-
-      <input
-        id="tags"
-        placeholder="不限時, 插座, 寵物友善"
-      >
-
-    </div>
-
 
     <div class="modal-actions">
-
-      <button
-        class="cancel"
-        onclick="closeModal()"
-      >
-        取消
-      </button>
-
-      <button
-        id="saveButton"
-        onclick="saveCafe()"
-      >
-        儲存
-      </button>
-
+      <button onclick="closeModal()">取消</button>
+      <button class="delete-btn" id="deleteBtn" onclick="deleteCafe()" style="display:none;">刪除</button>
+      <button class="save" onclick="saveCafe()">儲存</button>
     </div>
 
   </div>
-
 </div>
 
-
 <script>
-
 const areas = [
   "全部",
   "中區",
@@ -601,2016 +631,1357 @@ const areas = [
   "新社區"
 ];
 
-
-let cafes = [];
-
-try{
-
-  const saved =
-    localStorage.getItem("myCafeGuide");
-
-  if(saved){
-
-    cafes = JSON.parse(saved);
-
-    if(!Array.isArray(cafes)){
-      cafes = [];
-    }
-
-  }
-
-}catch(error){
-
-  console.error(error);
-
-  cafes = [];
-
-}
-
+let cafes = JSON.parse(localStorage.getItem("myCafeGuide") || "[]");
 
 let currentArea = "全部";
 let editingId = null;
 let currentPhotos = [];
 let db = null;
 
+/* =========================
+   IndexedDB
+========================= */
 
-function openImageDB(){
-
+function initDB(){
   return new Promise((resolve,reject)=>{
+    const request = indexedDB.open("MyCafeGuideImages",1);
 
-    const request =
-      indexedDB.open(
-        "MyCafeGuideImages",
-        1
-      );
+    request.onupgradeneeded = function(e){
+      const database = e.target.result;
 
-    request.onupgradeneeded =
-      function(event){
+      if(!database.objectStoreNames.contains("photos")){
+        database.createObjectStore("photos",{
+          keyPath:"id"
+        });
+      }
+    };
 
-        const database =
-          event.target.result;
+    request.onsuccess = function(e){
+      db = e.target.result;
+      resolve(db);
+    };
 
-        if(
-          !database.objectStoreNames.contains("photos")
-        ){
-
-          database.createObjectStore(
-            "photos",
-            {keyPath:"id"}
-          );
-
-        }
-
-      };
-
-    request.onsuccess =
-      function(){
-
-        db = request.result;
-
-        resolve(db);
-
-      };
-
-    request.onerror =
-      function(){
-
-        reject(request.error);
-
-      };
-
+    request.onerror = function(){
+      reject(request.error);
+    };
   });
-
 }
 
-
-function saveImageToDB(id,blob){
-
+function saveImageBlob(id,blob){
   return new Promise((resolve,reject)=>{
+    const tx = db.transaction("photos","readwrite");
+    const store = tx.objectStore("photos");
 
-    const transaction =
-      db.transaction(
-        ["photos"],
-        "readwrite"
-      );
+    store.put({
+      id:id,
+      blob:blob
+    });
 
-    const store =
-      transaction.objectStore(
-        "photos"
-      );
-
-    const request =
-      store.put({
-        id:id,
-        blob:blob
-      });
-
-    request.onsuccess =
-      ()=>resolve(id);
-
-    request.onerror =
-      ()=>reject(request.error);
-
+    tx.oncomplete = ()=>resolve();
+    tx.onerror = ()=>reject(tx.error);
   });
-
 }
 
-
-function getImageFromDB(id){
-
+function getImageBlob(id){
   return new Promise((resolve,reject)=>{
+    const tx = db.transaction("photos","readonly");
+    const store = tx.objectStore("photos");
+    const request = store.get(id);
 
-    const transaction =
-      db.transaction(
-        ["photos"],
-        "readonly"
-      );
+    request.onsuccess = ()=>{
+      resolve(request.result ? request.result.blob : null);
+    };
 
-    const store =
-      transaction.objectStore(
-        "photos"
-      );
-
-    const request =
-      store.get(id);
-
-    request.onsuccess =
-      function(){
-
-        if(request.result){
-
-          resolve(
-            request.result.blob
-          );
-
-        }else{
-
-          resolve(null);
-
-        }
-
-      };
-
-    request.onerror =
-      ()=>reject(request.error);
-
+    request.onerror = ()=>{
+      reject(request.error);
+    };
   });
-
 }
 
-
-function deleteImageFromDB(id){
-
+function deleteImageBlob(id){
   return new Promise((resolve,reject)=>{
+    const tx = db.transaction("photos","readwrite");
+    tx.objectStore("photos").delete(id);
 
-    const transaction =
-      db.transaction(
-        ["photos"],
-        "readwrite"
-      );
-
-    const store =
-      transaction.objectStore(
-        "photos"
-      );
-
-    const request =
-      store.delete(id);
-
-    request.onsuccess =
-      ()=>resolve();
-
-    request.onerror =
-      ()=>reject(request.error);
-
+    tx.oncomplete = ()=>resolve();
+    tx.onerror = ()=>reject(tx.error);
   });
-
 }
 
-
-async function dataURLToBlob(dataURL){
-
-  const response =
-    await fetch(dataURL);
-
-  return response.blob();
-
-}
-
+/* =========================
+   HEIC
+========================= */
 
 function isHEIC(file){
+  const name = file.name.toLowerCase();
 
-  const name =
-    String(
-      file.name || ""
-    ).toLowerCase();
-
-  const type =
-    String(
-      file.type || ""
-    ).toLowerCase();
-
-  return(
-    type === "image/heic" ||
-    type === "image/heif" ||
+  return (
+    file.type === "image/heic" ||
+    file.type === "image/heif" ||
     name.endsWith(".heic") ||
     name.endsWith(".heif")
   );
-
 }
 
+async function convertHEIC(file){
+  if(!isHEIC(file)){
+    return file;
+  }
 
-function loadImage(blob){
+  if(typeof heic2any === "undefined"){
+    throw new Error("HEIC轉檔套件尚未載入");
+  }
 
-  return new Promise(resolve=>{
+  const converted = await heic2any({
+    blob:file,
+    toType:"image/jpeg",
+    quality:.85
+  });
 
-    const url =
-      URL.createObjectURL(blob);
+  return Array.isArray(converted)
+    ? converted[0]
+    : converted;
+}
 
-    const img =
-      new Image();
+/* =========================
+   壓縮照片
+========================= */
 
-    img.onload =
-      function(){
+async function compressImage(file){
+  const converted = await convertHEIC(file);
 
-        URL.revokeObjectURL(url);
+  return new Promise((resolve,reject)=>{
 
-        resolve(img);
+    const img = new Image();
+    const url = URL.createObjectURL(converted);
 
-      };
+    img.onload = function(){
 
-    img.onerror =
-      function(){
+      URL.revokeObjectURL(url);
 
-        URL.revokeObjectURL(url);
+      let width = img.width;
+      let height = img.height;
 
-        resolve(null);
+      const maxSize = 1400;
 
-      };
+      if(width > maxSize || height > maxSize){
+
+        if(width > height){
+          height = Math.round(height * maxSize / width);
+          width = maxSize;
+        }else{
+          width = Math.round(width * maxSize / height);
+          height = maxSize;
+        }
+      }
+
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+
+      const ctx = canvas.getContext("2d");
+
+      ctx.drawImage(img,0,0,width,height);
+
+      let quality = .82;
+
+      function tryCompress(){
+
+        canvas.toBlob(function(blob){
+
+          if(!blob){
+            reject(new Error("照片壓縮失敗"));
+            return;
+          }
+
+          if(blob.size > 180 * 1024 && quality > .45){
+
+            quality -= .08;
+            tryCompress();
+
+          }else{
+            resolve(blob);
+          }
+
+        },"image/jpeg",quality);
+      }
+
+      tryCompress();
+    };
+
+    img.onerror = function(){
+      URL.revokeObjectURL(url);
+      reject(new Error("無法讀取圖片"));
+    };
 
     img.src = url;
-
   });
-
 }
 
+/* =========================
+   Photo input
+========================= */
 
-function canvasToBlob(canvas,quality){
+document.getElementById("photos").addEventListener("change", async function(e){
 
-  return new Promise(resolve=>{
+  const files = Array.from(e.target.files);
 
-    canvas.toBlob(
-      blob=>resolve(blob),
-      "image/jpeg",
-      quality
-    );
+  if(!files.length) return;
 
-  });
+  for(const file of files){
 
-}
+    try{
 
+      const blob = await compressImage(file);
 
-async function compressImage(input){
+      currentPhotos.push({
+        id:null,
+        blob:blob,
 
-  let blob = input;
-
-
-  if(isHEIC(input)){
-
-    if(
-      typeof heic2any === "undefined"
-    ){
-
-      throw new Error(
-        "HEIC 轉換工具沒有載入"
-      );
-
-    }
-
-    const converted =
-      await heic2any({
-
-        blob:input,
-
-        toType:"image/jpeg",
-
-        quality:0.7
-
+        /* ★ 每張照片自己的位置設定 */
+        scale:1,
+        x:0,
+        y:0
       });
 
-    blob =
-      Array.isArray(converted)
-      ? converted[0]
-      : converted;
+    }catch(error){
 
-  }
-
-
-  const img =
-    await loadImage(blob);
-
-
-  if(!img){
-
-    throw new Error(
-      "瀏覽器無法讀取照片"
-    );
-
-  }
-
-
-  const originalWidth =
-    img.naturalWidth ||
-    img.width;
-
-  const originalHeight =
-    img.naturalHeight ||
-    img.height;
-
-
-  const maxSize = 1400;
-
-
-  const ratio =
-    Math.min(
-      1,
-      maxSize / originalWidth,
-      maxSize / originalHeight
-    );
-
-
-  let width =
-    Math.round(
-      originalWidth * ratio
-    );
-
-  let height =
-    Math.round(
-      originalHeight * ratio
-    );
-
-
-  const canvas =
-    document.createElement(
-      "canvas"
-    );
-
-
-  canvas.width =
-    width;
-
-  canvas.height =
-    height;
-
-
-  const ctx =
-    canvas.getContext("2d");
-
-
-  ctx.drawImage(
-    img,
-    0,
-    0,
-    width,
-    height
-  );
-
-
-  let quality = 0.72;
-
-  let output = null;
-
-
-  for(
-    let i=0;
-    i<8;
-    i++
-  ){
-
-    output =
-      await canvasToBlob(
-        canvas,
-        quality
-      );
-
-
-    if(
-      output &&
-      output.size <=
-      180 * 1024
-    ){
-
-      break;
-
+      console.error(error);
+      alert("有照片無法讀取，請確認照片格式。");
     }
-
-
-    quality -= 0.07;
-
-
-    if(quality < 0.35){
-
-      break;
-
-    }
-
   }
 
+  this.value = "";
 
-  if(
-    output &&
-    output.size >
-    180 * 1024
-  ){
+  showPreview();
+  renderPhotoEditors();
+});
 
-    width =
-      Math.round(
-        width * 0.8
-      );
+/* =========================
+   Preview
+========================= */
 
-    height =
-      Math.round(
-        height * 0.8
-      );
+function showPreview(){
 
+  const list = document.getElementById("previewList");
 
-    canvas.width =
-      width;
+  list.innerHTML = "";
 
-    canvas.height =
-      height;
+  currentPhotos.forEach((photo,index)=>{
 
+    const item = document.createElement("div");
+    item.className = "preview-item";
 
-    ctx.drawImage(
-      img,
-      0,
-      0,
-      width,
-      height
-    );
-
-
-    output =
-      await canvasToBlob(
-        canvas,
-        0.5
-      );
-
-  }
-
-
-  if(!output){
-
-    throw new Error(
-      "照片壓縮失敗"
-    );
-
-  }
-
-
-  return output;
-
-}
-
-
-document
-.getElementById("photos")
-.addEventListener(
-  "change",
-  async function(){
-
-    const files =
-      Array.from(
-        this.files || []
-      );
-
-
-    if(!files.length){
-
-      return;
-
-    }
-
-
-    const status =
-      document.getElementById(
-        "photoStatus"
-      );
-
-
-    status.innerText =
-      "照片正在自動壓縮，請稍候…";
-
-
-    let success = 0;
-    let failed = 0;
-
-
-    for(
-      const file of files
-    ){
-
-      try{
-
-        const compressed =
-          await compressImage(
-            file
-          );
-
-
-        currentPhotos.push({
-
-          id:
-            "new_" +
-            Date.now() +
-            "_" +
-            Math.random()
-              .toString(36)
-              .slice(2),
-
-          blob:
-            compressed,
-
-          isNew:true
-
-        });
-
-
-        success++;
-
-        await showPreview();
-
-      }catch(error){
-
-        console.error(
-          file.name,
-          error
-        );
-
-        failed++;
-
-      }
-
-    }
-
-
-    if(failed === 0){
-
-      status.innerText =
-        `✓ 已加入 ${success} 張照片，已自動壓縮`;
-
-    }else{
-
-      status.innerText =
-        `✓ 成功 ${success} 張　｜　⚠️ ${failed} 張無法讀取`;
-
-    }
-
-
-    this.value = "";
-
-  }
-);
-
-
-async function showPreview(){
-
-  const preview =
-    document.getElementById(
-      "preview"
-    );
-
-
-  preview.innerHTML = "";
-
-
-  for(
-    let index=0;
-    index<currentPhotos.length;
-    index++
-  ){
-
-    const photo =
-      currentPhotos[index];
-
-
-    const item =
-      document.createElement(
-        "div"
-      );
-
-    item.className =
-      "preview-item";
-
-
-    const img =
-      document.createElement(
-        "img"
-      );
-
+    const img = document.createElement("img");
 
     if(photo.blob){
-
-      img.src =
-        URL.createObjectURL(
-          photo.blob
-        );
-
+      img.src = URL.createObjectURL(photo.blob);
+    }else if(photo.url){
+      img.src = photo.url;
     }
-
-    else if(photo.dataURL){
-
-      img.src =
-        photo.dataURL;
-
-    }
-
-    else if(photo.id){
-
-      try{
-
-        const blob =
-          await getImageFromDB(
-            photo.id
-          );
-
-        if(blob){
-
-          img.src =
-            URL.createObjectURL(
-              blob
-            );
-
-        }
-
-      }catch(error){
-
-        console.error(error);
-
-      }
-
-    }
-
-
-    const remove =
-      document.createElement(
-        "button"
-      );
-
-
-    remove.type =
-      "button";
-
-    remove.className =
-      "remove-photo";
-
-    remove.textContent =
-      "×";
-
-
-    remove.onclick =
-      function(){
-
-        removePhoto(index);
-
-      };
-
 
     item.appendChild(img);
 
-    item.appendChild(remove);
+    const button = document.createElement("button");
 
-    preview.appendChild(item);
+    button.innerHTML = "×";
 
-  }
+    button.onclick = function(){
+      removePhoto(index);
+    };
 
+    item.appendChild(button);
+
+    list.appendChild(item);
+  });
 }
-
 
 async function removePhoto(index){
 
-  const photo =
-    currentPhotos[index];
+  const photo = currentPhotos[index];
 
-
-  if(
-    photo &&
-    photo.id &&
-    !photo.isNew &&
-    !photo.isOld
-  ){
-
+  if(photo && photo.id){
     try{
-
-      await deleteImageFromDB(
-        photo.id
-      );
-
-    }catch(error){
-
-      console.error(error);
-
+      await deleteImageBlob(photo.id);
+    }catch(e){
+      console.error(e);
     }
-
   }
 
+  currentPhotos.splice(index,1);
 
-  currentPhotos.splice(
-    index,
-    1
-  );
-
-
-  await showPreview();
-
-
-  document.getElementById(
-    "photoStatus"
-  ).innerText =
-    `目前有 ${currentPhotos.length} 張照片`;
-
+  showPreview();
+  renderPhotoEditors();
 }
 
+/* =========================
+   Photo editor
+========================= */
+
+function renderPhotoEditors(){
+
+  const list = document.getElementById("photoEditList");
+
+  list.innerHTML = "";
+
+  currentPhotos.forEach((photo,index)=>{
+
+    const box = document.createElement("div");
+    box.className = "photo-editor";
+
+    const title = document.createElement("div");
+    title.className = "photo-editor-title";
+    title.textContent = `第 ${index + 1} 張照片`;
+
+    box.appendChild(title);
+
+    const preview = document.createElement("div");
+    preview.className = "adjust-preview";
+
+    const img = document.createElement("img");
+
+    if(photo.blob){
+      img.src = URL.createObjectURL(photo.blob);
+    }else if(photo.url){
+      img.src = photo.url;
+    }
+
+    preview.appendChild(img);
+
+    box.appendChild(preview);
+
+    const controls = document.createElement("div");
+    controls.className = "adjust-controls";
+
+    /* 縮放 */
+    const scaleControl = document.createElement("div");
+    scaleControl.className = "control-item full";
+
+    const scaleLabel = document.createElement("label");
+    scaleLabel.textContent = "照片縮放";
+
+    const scaleInput = document.createElement("input");
+    scaleInput.type = "range";
+    scaleInput.min = "1";
+    scaleInput.max = "2";
+    scaleInput.step = "0.01";
+    scaleInput.value = photo.scale || 1;
+
+    const scaleValue = document.createElement("div");
+    scaleValue.className = "range-value";
+    scaleValue.textContent =
+      Math.round((photo.scale || 1) * 100) + "%";
+
+    scaleInput.oninput = function(){
+
+      photo.scale = Number(this.value);
+
+      scaleValue.textContent =
+        Math.round(photo.scale * 100) + "%";
+
+      updatePhotoPreview(preview,img,photo);
+    };
+
+    scaleControl.appendChild(scaleLabel);
+    scaleControl.appendChild(scaleInput);
+    scaleControl.appendChild(scaleValue);
+
+    controls.appendChild(scaleControl);
+
+    /* 左右 */
+    const xControl = document.createElement("div");
+    xControl.className = "control-item";
+
+    const xLabel = document.createElement("label");
+    xLabel.textContent = "左右位置";
+
+    const xInput = document.createElement("input");
+    xInput.type = "range";
+    xInput.min = "-50";
+    xInput.max = "50";
+    xInput.step = "1";
+    xInput.value = photo.x || 0;
+
+    const xValue = document.createElement("div");
+    xValue.className = "range-value";
+    xValue.textContent = `${photo.x || 0}%`;
+
+    xInput.oninput = function(){
+
+      photo.x = Number(this.value);
+
+      xValue.textContent = `${photo.x}%`;
+
+      updatePhotoPreview(preview,img,photo);
+    };
+
+    xControl.appendChild(xLabel);
+    xControl.appendChild(xInput);
+    xControl.appendChild(xValue);
+
+    controls.appendChild(xControl);
+
+    /* 上下 */
+    const yControl = document.createElement("div");
+    yControl.className = "control-item";
+
+    const yLabel = document.createElement("label");
+    yLabel.textContent = "上下位置";
+
+    const yInput = document.createElement("input");
+    yInput.type = "range";
+    yInput.min = "-50";
+    yInput.max = "50";
+    yInput.step = "1";
+    yInput.value = photo.y || 0;
+
+    const yValue = document.createElement("div");
+    yValue.className = "range-value";
+    yValue.textContent = `${photo.y || 0}%`;
+
+    yInput.oninput = function(){
+
+      photo.y = Number(this.value);
+
+      yValue.textContent = `${photo.y}%`;
+
+      updatePhotoPreview(preview,img,photo);
+    };
+
+    yControl.appendChild(yLabel);
+    yControl.appendChild(yInput);
+    yControl.appendChild(yValue);
+
+    controls.appendChild(yControl);
+
+    box.appendChild(controls);
+
+    list.appendChild(box);
+
+    updatePhotoPreview(preview,img,photo);
+  });
+}
+
+function updatePhotoPreview(preview,img,photo){
+
+  preview.style.setProperty(
+    "--preview-scale",
+    photo.scale || 1
+  );
+
+  preview.style.setProperty(
+    "--preview-x",
+    `${photo.x || 0}%`
+  );
+
+  preview.style.setProperty(
+    "--preview-y",
+    `${photo.y || 0}%`
+  );
+}
+
+/* =========================
+   Categories
+========================= */
 
 function renderCategories(){
 
-  category.innerHTML = "";
+  const box = document.getElementById("categories");
 
+  box.innerHTML = "";
 
   areas.forEach(area=>{
 
-    const button =
-      document.createElement(
-        "button"
-      );
+    const button = document.createElement("button");
 
+    button.textContent = area;
 
-    button.textContent =
-      area;
-
-
-    if(
-      area === currentArea
-    ){
-
-      button.classList.add(
-        "active"
-      );
-
+    if(area === currentArea){
+      button.classList.add("active");
     }
 
+    button.onclick = function(){
 
-    button.onclick =
-      function(){
+      currentArea = area;
 
-        currentArea =
-          area;
+      renderCategories();
+      renderCafes();
+    };
 
-        renderCategories();
-
-        renderCafes();
-
-      };
-
-
-    category.appendChild(
-      button
-    );
-
+    box.appendChild(button);
   });
 
+  const select = document.getElementById("area");
+
+  select.innerHTML = "";
+
+  areas
+    .filter(a=>a !== "全部")
+    .forEach(area=>{
+
+      const option = document.createElement("option");
+
+      option.value = area;
+      option.textContent = area;
+
+      select.appendChild(option);
+    });
 }
 
+/* =========================
+   Photo helpers
+========================= */
 
 async function getFirstPhoto(cafe){
 
-  if(
-    Array.isArray(
-      cafe.photoRefs
-    ) &&
-    cafe.photoRefs.length
-  ){
+  if(!cafe.photos || !cafe.photos.length){
+    return null;
+  }
 
-    const blob =
-      await getImageFromDB(
-        cafe.photoRefs[0]
-      );
+  const first = cafe.photos[0];
 
+  if(first.data){
+    return first.data;
+  }
+
+  if(first.url){
+    return first.url;
+  }
+
+  if(first.id && db){
+
+    const blob = await getImageBlob(first.id);
 
     if(blob){
-
-      return URL.createObjectURL(
-        blob
-      );
-
+      return URL.createObjectURL(blob);
     }
-
   }
 
-
-  if(
-    Array.isArray(
-      cafe.photos
-    ) &&
-    cafe.photos.length
-  ){
-
-    return cafe.photos[0];
-
-  }
-
-
-  return "";
-
+  return null;
 }
-
 
 function getPhotoCount(cafe){
 
-  if(
-    Array.isArray(
-      cafe.photoRefs
-    )
-  ){
-
-    return cafe.photoRefs.length;
-
-  }
-
-
-  if(
-    Array.isArray(
-      cafe.photos
-    )
-  ){
-
-    return cafe.photos.length;
-
-  }
-
-
-  return 0;
-
+  return cafe.photos
+    ? cafe.photos.length
+    : 0;
 }
 
+/* =========================
+   Render cafes
+========================= */
 
 async function renderCafes(){
 
+  const list = document.getElementById("cafeList");
+
   const keyword =
-    searchInput.value
+    document.getElementById("searchInput")
+      .value
       .trim()
       .toLowerCase();
 
+  let filtered = cafes.filter(cafe=>{
 
-  const list =
-    cafes.filter(cafe=>{
+    const areaOK =
+      currentArea === "全部" ||
+      cafe.area === currentArea;
 
-      const areaMatch =
-        currentArea === "全部" ||
-        cafe.area === currentArea;
-
-
-      const tags =
-        Array.isArray(cafe.tags)
-        ?
-        cafe.tags
-        :
-        String(
-          cafe.tags || ""
-        )
-          .split(",")
-          .map(
-            x=>x.trim()
-          )
-          .filter(Boolean);
-
-
-      const searchText = [
-
-        cafe.name || "",
-
-        cafe.area || "",
-
-        cafe.address || "",
-
-        cafe.description || "",
-
-        ...tags
-
-      ]
+    const text = [
+      cafe.name,
+      cafe.area,
+      cafe.address,
+      cafe.tags,
+      cafe.description
+    ]
+      .filter(Boolean)
       .join(" ")
       .toLowerCase();
 
+    const searchOK =
+      !keyword ||
+      text.includes(keyword);
 
-      const searchMatch =
-        !keyword ||
-        searchText.includes(
-          keyword
-        );
+    return areaOK && searchOK;
+  });
 
+  if(!filtered.length){
 
-      return(
-        areaMatch &&
-        searchMatch
-      );
-
-    });
-
-
-  if(!list.length){
-
-    cafeGrid.innerHTML =
-      `
-      <div class="empty">
-        目前沒有符合的咖啡廳 ♡
-      </div>
-      `;
+    list.innerHTML =
+      `<div class="empty">目前沒有符合的咖啡廳 ♡</div>`;
 
     return;
-
   }
 
+  list.innerHTML = "";
 
-  cafeGrid.innerHTML =
-    `
-    <div
-      class="loading"
-      style="grid-column:1/-1"
-    >
-      載入中…
-    </div>
-    `;
+  for(const cafe of filtered){
 
+    const card = document.createElement("div");
+    card.className = "cafe-card";
 
-  let html = "";
+    const photoArea = document.createElement("div");
+    photoArea.className = "photo-area";
 
-
-  for(
-    const cafe of list
-  ){
-
-    /*
-      這裡統一 1:1
-      使用者設定的數字同時作為寬與高
-    */
-
-    const size =
+    const size = Math.max(
+      100,
       Math.min(
         600,
-        Math.max(
-          100,
-          Number(
-            cafe.imageHeight
-          ) || 260
-        )
+        Number(cafe.imageHeight) || 260
+      )
+    );
+
+    const photoWrap = document.createElement("div");
+    photoWrap.className = "photo-wrap";
+
+    /* ★ 這裡真正控制正方形大小 */
+    photoWrap.style.setProperty(
+      "--photo-size",
+      `${size}px`
+    );
+
+    const photo = cafe.photos && cafe.photos[0];
+
+    if(photo){
+
+      const img = document.createElement("img");
+
+      let imageURL = null;
+
+      if(photo.data){
+        imageURL = photo.data;
+      }else if(photo.url){
+        imageURL = photo.url;
+      }
+
+      if(imageURL){
+
+        img.src = imageURL;
+
+      }else if(photo.id && db){
+
+        const blob = await getImageBlob(photo.id);
+
+        if(blob){
+          img.src = URL.createObjectURL(blob);
+        }
+      }
+
+      /* ★ 套用這一張照片自己的裁切位置 */
+      img.style.setProperty(
+        "--photo-scale",
+        photo.scale || 1
       );
 
+      img.style.setProperty(
+        "--photo-x",
+        `${photo.x || 0}%`
+      );
 
-    const photoCount =
-      getPhotoCount(cafe);
+      img.style.setProperty(
+        "--photo-y",
+        `${photo.y || 0}%`
+      );
 
-
-    let firstPhoto = "";
-
-
-    try{
-
-      firstPhoto =
-        await getFirstPhoto(
-          cafe
-        );
-
-    }catch(error){
-
-      console.error(error);
-
-    }
-
-
-    let photoHTML;
-
-
-    if(firstPhoto){
-
-      photoHTML =
-        `
-        <div
-          class="photo-wrap"
-          style="
-            width:100%;
-            aspect-ratio:1 / 1;
-            max-height:${size}px;
-            height:${size}px;
-          "
-        >
-
-          <img
-            src="${escapeAttribute(firstPhoto)}"
-            alt="${escapeHTML(cafe.name)}"
-          >
-
-          ${
-            photoCount > 1
-            ?
-            `
-            <div class="photo-count">
-              ＋${photoCount - 1} 張
-            </div>
-            `
-            :
-            ""
-          }
-
-        </div>
-        `;
+      photoWrap.appendChild(img);
 
     }else{
 
-      photoHTML =
-        `
-        <div
-          class="photo-wrap"
-          style="
-            width:100%;
-            aspect-ratio:1 / 1;
-            max-height:${size}px;
-            height:${size}px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            color:#aaa;
-          "
-        >
-          尚未上傳照片
-        </div>
-        `;
+      const placeholder =
+        document.createElement("div");
 
+      placeholder.className =
+        "photo-placeholder";
+
+      placeholder.textContent =
+        "尚未上傳照片";
+
+      photoWrap.appendChild(placeholder);
     }
 
+    photoArea.appendChild(photoWrap);
 
-    const tags =
-      Array.isArray(cafe.tags)
-      ?
+    if(getPhotoCount(cafe) > 1){
+
+      const count = document.createElement("div");
+
+      count.className = "photo-count";
+
+      count.textContent =
+        `${getPhotoCount(cafe)} 張照片`;
+
+      photoArea.appendChild(count);
+    }
+
+    card.appendChild(photoArea);
+
+    const content =
+      document.createElement("div");
+
+    content.className = "card-content";
+
+    const top =
+      document.createElement("div");
+
+    top.className = "card-top";
+
+    const title =
+      document.createElement("h2");
+
+    title.className = "card-title";
+
+    title.textContent = cafe.name || "";
+
+    top.appendChild(title);
+
+    const favorite =
+      document.createElement("button");
+
+    favorite.className = "favorite";
+
+    favorite.innerHTML =
+      cafe.favorite ? "♥" : "♡";
+
+    favorite.onclick = function(){
+      toggleFavorite(cafe.id);
+    };
+
+    top.appendChild(favorite);
+
+    content.appendChild(top);
+
+    const meta =
+      document.createElement("div");
+
+    meta.className = "meta";
+
+    meta.textContent =
+      `${cafe.area || ""}${cafe.address ? " ・ " + cafe.address : ""}`;
+
+    content.appendChild(meta);
+
+    if(cafe.tags){
+
+      const tags =
+        document.createElement("div");
+
+      tags.className = "tags";
+
       cafe.tags
-      :
-      String(
-        cafe.tags || ""
-      )
         .split(",")
-        .map(
-          x=>x.trim()
-        )
-        .filter(Boolean);
+        .map(t=>t.trim())
+        .filter(Boolean)
+        .forEach(tagText=>{
 
+          const tag =
+            document.createElement("span");
 
-    const tagsHTML =
-      tags
-        .map(
-          tag =>
-            `
-            <span class="tag">
-              ${escapeHTML(tag)}
-            </span>
-            `
-        )
-        .join("");
+          tag.className = "tag";
 
+          tag.textContent = tagText;
 
-    const instagramHTML =
-      cafe.instagram
-      ?
-      `
-      <a
-        class="ig-btn"
-        href="${escapeAttribute(cafe.instagram)}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Instagram
-      </a>
-      `
-      :
-      "";
+          tags.appendChild(tag);
+        });
 
+      content.appendChild(tags);
+    }
 
-    html +=
-      `
-      <div class="card">
+    if(cafe.description){
 
-        ${photoHTML}
+      const descriptionBox =
+        document.createElement("div");
 
-        <div class="card-content">
+      descriptionBox.className =
+        "description-box";
 
-          <span
-            class="favorite"
-            onclick="toggleFavorite('${escapeAttribute(String(cafe.id))}')"
-          >
-            ${
-              cafe.favorite
-              ? "♥"
-              : "♡"
-            }
-          </span>
+      const descriptionTitle =
+        document.createElement("div");
 
+      descriptionTitle.className =
+        "description-title";
 
-          <h3>
-            ${escapeHTML(cafe.name)}
-          </h3>
+      descriptionTitle.textContent =
+        "備注";
 
+      const description =
+        document.createElement("div");
 
-          <div class="area">
-            ${escapeHTML(cafe.area || "")}
-          </div>
+      description.className =
+        "description";
 
+      description.textContent =
+        cafe.description;
 
-          ${
-            cafe.address
-            ?
-            `
-            <div class="address">
-              ${escapeHTML(cafe.address)}
-            </div>
-            `
-            :
-            ""
-          }
+      descriptionBox.appendChild(
+        descriptionTitle
+      );
 
+      descriptionBox.appendChild(
+        description
+      );
 
-          ${
-            cafe.description
-            ?
-            `
-            <div class="description-box">
+      content.appendChild(
+        descriptionBox
+      );
+    }
 
-              <div class="description-title">
-                備注
-              </div>
+    const actions =
+      document.createElement("div");
 
-              <div class="description">
-                ${escapeHTML(cafe.description)}
-              </div>
+    actions.className =
+      "card-actions";
 
-            </div>
-            `
-            :
-            ""
-          }
+    const mapButton =
+      document.createElement("button");
 
+    mapButton.className = "map";
 
-          ${
-            tagsHTML
-            ?
-            `
-            <div class="tags">
-              ${tagsHTML}
-            </div>
-            `
-            :
-            ""
-          }
+    mapButton.textContent =
+      "📍 地圖";
 
+    mapButton.onclick = function(){
+      openMap(cafe.address);
+    };
 
-          <div class="actions">
+    actions.appendChild(mapButton);
 
-            ${
-              cafe.address
-              ?
-              `
-              <button
-                class="map-btn"
-                onclick="openMap('${escapeAttribute(cafe.address)}')"
-              >
-                Google Maps
-              </button>
-              `
-              :
-              ""
-            }
+    if(cafe.instagram){
 
+      const igButton =
+        document.createElement("button");
 
-            ${instagramHTML}
+      igButton.textContent =
+        "Instagram";
 
+      igButton.onclick = function(){
 
-            <button
-              class="edit-btn"
-              onclick="editCafe('${escapeAttribute(String(cafe.id))}')"
-            >
-              修改
-            </button>
+        window.open(
+          cafe.instagram,
+          "_blank"
+        );
+      };
 
+      actions.appendChild(igButton);
+    }
 
-            <button
-              class="delete-btn"
-              onclick="deleteCafe('${escapeAttribute(String(cafe.id))}')"
-            >
-              刪除
-            </button>
+    const editButton =
+      document.createElement("button");
 
-          </div>
+    editButton.textContent =
+      "編輯";
 
-        </div>
+    editButton.onclick = function(){
+      editCafe(cafe.id);
+    };
 
-      </div>
-      `;
+    actions.appendChild(editButton);
 
+    content.appendChild(actions);
+
+    card.appendChild(content);
+
+    list.appendChild(card);
   }
-
-
-  cafeGrid.innerHTML =
-    html;
-
 }
 
+/* =========================
+   Open modal
+========================= */
 
 async function openModal(id=null){
 
-  editingId =
-    id;
+  editingId = id;
 
-  currentPhotos =
-    [];
+  document.getElementById("modal")
+    .classList.add("show");
 
+  document.getElementById("modalTitle")
+    .textContent =
+      id ? "編輯咖啡廳" : "新增咖啡廳";
 
-  document.getElementById(
-    "modal"
-  ).style.display =
-    "block";
+  document.getElementById("deleteBtn")
+    .style.display =
+      id ? "block" : "none";
 
+  currentPhotos = [];
 
-  document.getElementById(
-    "modalTitle"
-  ).textContent =
-    id
-    ? "修改咖啡廳"
-    : "新增咖啡廳";
+  if(id){
 
+    const cafe =
+      cafes.find(c=>c.id === id);
 
-  const areaSelect =
-    document.getElementById(
-      "area"
-    );
+    if(!cafe) return;
 
+    document.getElementById("name").value =
+      cafe.name || "";
 
-  areaSelect.innerHTML =
-    areas
-      .filter(
-        a=>a!=="全部"
-      )
-      .map(
-        a=>
-          `
-          <option value="${escapeAttribute(a)}">
-            ${escapeHTML(a)}
-          </option>
-          `
-      )
-      .join("");
+    document.getElementById("area").value =
+      cafe.area || areas[1];
 
+    document.getElementById("address").value =
+      cafe.address || "";
 
-  document.getElementById(
-    "name"
-  ).value = "";
+    document.getElementById("instagram").value =
+      cafe.instagram || "";
 
+    document.getElementById("tags").value =
+      cafe.tags || "";
 
-  document.getElementById(
-    "area"
-  ).value =
-    "中區";
+    document.getElementById("description").value =
+      cafe.description || "";
 
+    document.getElementById("imageHeight").value =
+      cafe.imageHeight || 260;
 
-  document.getElementById(
-    "address"
-  ).value = "";
+    if(cafe.photos){
 
+      for(const photo of cafe.photos){
 
-  document.getElementById(
-    "instagram"
-  ).value = "";
+        if(photo.id && db){
 
+          try{
 
-  document.getElementById(
-    "description"
-  ).value = "";
+            const blob =
+              await getImageBlob(photo.id);
 
+            if(blob){
 
-  document.getElementById(
-    "tags"
-  ).value = "";
+              currentPhotos.push({
+                id:photo.id,
+                blob:blob,
+                scale:photo.scale || 1,
+                x:photo.x || 0,
+                y:photo.y || 0
+              });
 
+            }
+          }catch(e){
+            console.error(e);
+          }
 
-  document.getElementById(
-    "imageHeight"
-  ).value =
-    "260";
+        }else{
 
+          currentPhotos.push({
+            id:null,
+            data:photo.data || null,
+            url:photo.url || null,
+            scale:photo.scale || 1,
+            x:photo.x || 0,
+            y:photo.y || 0
+          });
+        }
+      }
+    }
 
-  document.getElementById(
-    "photos"
-  ).value = "";
+  }else{
 
+    document.getElementById("name").value = "";
 
-  document.getElementById(
-    "preview"
-  ).innerHTML = "";
+    document.getElementById("area").value =
+      areas[1];
 
+    document.getElementById("address").value = "";
 
-  document.getElementById(
-    "photoStatus"
-  ).innerText = "";
+    document.getElementById("instagram").value = "";
 
+    document.getElementById("tags").value = "";
 
-  if(!id){
+    document.getElementById("description").value = "";
 
-    return;
-
+    document.getElementById("imageHeight").value = 260;
   }
 
-
-  const cafe =
-    cafes.find(
-      c =>
-        String(c.id) ===
-        String(id)
-    );
-
-
-  if(!cafe){
-
-    return;
-
-  }
-
-
-  document.getElementById(
-    "name"
-  ).value =
-    cafe.name || "";
-
-
-  document.getElementById(
-    "area"
-  ).value =
-    cafe.area || "中區";
-
-
-  document.getElementById(
-    "address"
-  ).value =
-    cafe.address || "";
-
-
-  document.getElementById(
-    "instagram"
-  ).value =
-    cafe.instagram || "";
-
-
-  document.getElementById(
-    "description"
-  ).value =
-    cafe.description || "";
-
-
-  const tags =
-    Array.isArray(cafe.tags)
-    ?
-    cafe.tags
-    :
-    String(
-      cafe.tags || ""
-    )
-      .split(",")
-      .map(
-        x=>x.trim()
-      )
-      .filter(Boolean);
-
-
-  document.getElementById(
-    "tags"
-  ).value =
-    tags.join(", ");
-
-
-  document.getElementById(
-    "imageHeight"
-  ).value =
-    cafe.imageHeight || 260;
-
-
-  if(
-    Array.isArray(
-      cafe.photoRefs
-    )
-  ){
-
-    currentPhotos =
-      cafe.photoRefs.map(
-        id=>({
-          id:id,
-          isNew:false,
-          isOld:false
-        })
-      );
-
-  }
-
-  else if(
-    Array.isArray(
-      cafe.photos
-    )
-  ){
-
-    currentPhotos =
-      cafe.photos.map(
-        src=>({
-          dataURL:src,
-          isOld:true
-        })
-      );
-
-  }
-
-
-  await showPreview();
-
+  showPreview();
+  renderPhotoEditors();
 }
-
 
 function closeModal(){
 
-  document.getElementById(
-    "modal"
-  ).style.display =
-    "none";
+  document.getElementById("modal")
+    .classList.remove("show");
 
-
-  editingId =
-    null;
-
-
-  currentPhotos =
-    [];
-
+  editingId = null;
+  currentPhotos = [];
 }
 
+/* =========================
+   Save photos
+========================= */
 
-async function saveCurrentPhotos(
-  cafeId
-){
+async function saveCurrentPhotos(cafeId){
 
-  const refs = [];
+  const photoRefs = [];
 
+  for(let i=0;i<currentPhotos.length;i++){
 
-  for(
-    const photo of currentPhotos
-  ){
+    const photo =
+      currentPhotos[i];
 
-    if(
-      photo.isNew &&
-      photo.blob
-    ){
+    /* 已存在的照片 */
+    if(photo.id && photo.blob){
 
-      const id =
-        "photo_" +
-        cafeId +
-        "_" +
-        Date.now() +
-        "_" +
-        Math.random()
-          .toString(36)
-          .slice(2);
-
-
-      await saveImageToDB(
-        id,
+      await saveImageBlob(
+        photo.id,
         photo.blob
       );
 
+      photoRefs.push({
+        id:photo.id,
+        scale:photo.scale || 1,
+        x:photo.x || 0,
+        y:photo.y || 0
+      });
 
-      refs.push(id);
-
+      continue;
     }
 
-    else if(
-      photo.id &&
-      !photo.isOld
-    ){
+    /* 新照片 */
+    if(photo.blob){
 
-      refs.push(
-        photo.id
-      );
-
-    }
-
-    else if(
-      photo.dataURL
-    ){
-
-      const blob =
-        await dataURLToBlob(
-          photo.dataURL
-        );
-
-
-      const compressed =
-        await compressImage(
-          blob
-        );
-
-
-      const id =
-        "photo_" +
+      const imageId =
         cafeId +
         "_" +
         Date.now() +
         "_" +
+        i +
+        "_" +
         Math.random()
           .toString(36)
-          .slice(2);
+          .substring(2,8);
 
-
-      await saveImageToDB(
-        id,
-        compressed
+      await saveImageBlob(
+        imageId,
+        photo.blob
       );
 
+      photoRefs.push({
+        id:imageId,
+        scale:photo.scale || 1,
+        x:photo.x || 0,
+        y:photo.y || 0
+      });
 
-      refs.push(id);
-
+      continue;
     }
 
+    /* 舊版 Base64 照片 */
+    if(photo.data){
+
+      try{
+
+        const response =
+          await fetch(photo.data);
+
+        const blob =
+          await response.blob();
+
+        const imageId =
+          cafeId +
+          "_" +
+          Date.now() +
+          "_" +
+          i;
+
+        await saveImageBlob(
+          imageId,
+          blob
+        );
+
+        photoRefs.push({
+          id:imageId,
+          scale:photo.scale || 1,
+          x:photo.x || 0,
+          y:photo.y || 0
+        });
+
+      }catch(e){
+
+        console.error(e);
+      }
+    }
   }
 
-
-  return refs;
-
+  return photoRefs;
 }
 
+/* =========================
+   Save cafe
+========================= */
 
 async function saveCafe(){
 
-  const saveButton =
-    document.getElementById(
-      "saveButton"
-    );
+  const name =
+    document.getElementById("name")
+      .value.trim();
 
+  if(!name){
 
-  saveButton.disabled =
-    true;
-
-  saveButton.innerText =
-    "儲存中…";
-
-
-  try{
-
-    const name =
-      document.getElementById(
-        "name"
-      )
-        .value
-        .trim();
-
-
-    if(!name){
-
-      alert(
-        "請輸入咖啡廳名稱"
-      );
-
-      return;
-
-    }
-
-
-    const oldCafe =
-      editingId
-      ?
-      cafes.find(
-        c =>
-          String(c.id) ===
-          String(editingId)
-      )
-      :
-      null;
-
-
-    const cafeId =
-      editingId ||
-      Date.now().toString();
-
-
-    let photoRefs = [];
-
-
-    if(
-      currentPhotos.length
-    ){
-
-      photoRefs =
-        await saveCurrentPhotos(
-          cafeId
-        );
-
-    }
-
-
-    const cafe = {
-
-      id:cafeId,
-
-      name:name,
-
-      area:
-        document.getElementById(
-          "area"
-        ).value,
-
-      address:
-        document.getElementById(
-          "address"
-        )
-          .value
-          .trim(),
-
-      instagram:
-        document.getElementById(
-          "instagram"
-        )
-          .value
-          .trim(),
-
-      photoRefs:photoRefs,
-
-      /*
-        這裡的 imageHeight
-        現在代表正方形尺寸
-      */
-
-      imageHeight:
-        Math.min(
-          600,
-          Math.max(
-            100,
-            Number(
-              document.getElementById(
-                "imageHeight"
-              ).value
-            ) || 260
-          )
-        ),
-
-      description:
-        document.getElementById(
-          "description"
-        )
-          .value
-          .trim(),
-
-      tags:
-        document.getElementById(
-          "tags"
-        )
-          .value
-          .split(",")
-          .map(
-            x=>x.trim()
-          )
-          .filter(Boolean),
-
-      favorite:
-        oldCafe
-        ?
-        !!oldCafe.favorite
-        :
-        false
-
-    };
-
-
-    if(editingId){
-
-      cafes =
-        cafes.map(
-          c =>
-            String(c.id) ===
-            String(editingId)
-            ?
-            cafe
-            :
-            c
-        );
-
-    }
-
-    else{
-
-      cafes.unshift(
-        cafe
-      );
-
-    }
-
-
-    localStorage.setItem(
-      "myCafeGuide",
-      JSON.stringify(
-        cafes
-      )
-    );
-
-
-    closeModal();
-
-    await renderCafes();
-
-
-  }catch(error){
-
-    console.error(
-      error
-    );
-
-
-    alert(
-      "儲存失敗。\n\n請再試一次，如果仍然失敗，把錯誤畫面截圖給我。"
-    );
-
-  }finally{
-
-    saveButton.disabled =
-      false;
-
-    saveButton.innerText =
-      "儲存";
-
+    alert("請輸入店名");
+    return;
   }
 
+  const area =
+    document.getElementById("area")
+      .value;
+
+  const address =
+    document.getElementById("address")
+      .value.trim();
+
+  const instagram =
+    document.getElementById("instagram")
+      .value.trim();
+
+  const tags =
+    document.getElementById("tags")
+      .value.trim();
+
+  const description =
+    document.getElementById("description")
+      .value;
+
+  const imageHeight =
+    Math.max(
+      100,
+      Math.min(
+        600,
+        Number(
+          document.getElementById("imageHeight").value
+        ) || 260
+      )
+    );
+
+  const cafeId =
+    editingId ||
+    (
+      Date.now() +
+      "_" +
+      Math.random()
+        .toString(36)
+        .substring(2,8)
+    );
+
+  let oldCafe =
+    cafes.find(c=>c.id === cafeId);
+
+  const photoRefs =
+    await saveCurrentPhotos(cafeId);
+
+  const cafe = {
+
+    id:cafeId,
+
+    name:name,
+
+    area:area,
+
+    address:address,
+
+    instagram:instagram,
+
+    tags:tags,
+
+    description:description,
+
+    imageHeight:imageHeight,
+
+    photos:photoRefs,
+
+    favorite:
+      oldCafe
+        ? !!oldCafe.favorite
+        : false
+  };
+
+  if(editingId){
+
+    const index =
+      cafes.findIndex(
+        c=>c.id === editingId
+      );
+
+    if(index !== -1){
+      cafes[index] = cafe;
+    }
+
+  }else{
+
+    cafes.unshift(cafe);
+  }
+
+  localStorage.setItem(
+    "myCafeGuide",
+    JSON.stringify(cafes)
+  );
+
+  closeModal();
+
+  renderCafes();
 }
 
+/* =========================
+   Edit
+========================= */
 
 function editCafe(id){
 
   openModal(id);
-
 }
 
+/* =========================
+   Delete
+========================= */
 
-async function deleteCafe(id){
+async function deleteCafe(){
 
-  if(
-    !confirm(
-      "確定要刪除這間咖啡廳嗎？"
-    )
-  ){
-
-    return;
-
-  }
-
+  if(!editingId) return;
 
   const cafe =
-    cafes.find(
-      c =>
-        String(c.id) ===
-        String(id)
+    cafes.find(c=>c.id === editingId);
+
+  if(!cafe) return;
+
+  const ok =
+    confirm(
+      `確定要刪除「${cafe.name}」嗎？`
     );
 
+  if(!ok) return;
 
-  if(
-    cafe &&
-    Array.isArray(
-      cafe.photoRefs
-    )
-  ){
+  if(cafe.photos){
 
-    for(
-      const photoId
-      of cafe.photoRefs
-    ){
+    for(const photo of cafe.photos){
 
-      try{
+      if(photo.id){
 
-        await deleteImageFromDB(
-          photoId
-        );
-
-      }catch(error){
-
-        console.error(error);
-
+        try{
+          await deleteImageBlob(photo.id);
+        }catch(e){
+          console.error(e);
+        }
       }
-
     }
-
   }
-
 
   cafes =
     cafes.filter(
-      c =>
-        String(c.id) !==
-        String(id)
+      c=>c.id !== editingId
     );
-
 
   localStorage.setItem(
     "myCafeGuide",
-    JSON.stringify(
-      cafes
-    )
+    JSON.stringify(cafes)
   );
 
+  closeModal();
 
-  await renderCafes();
-
+  renderCafes();
 }
 
+/* =========================
+   Favorite
+========================= */
 
 function toggleFavorite(id){
 
-  cafes =
-    cafes.map(
-      cafe=>{
+  const cafe =
+    cafes.find(c=>c.id === id);
 
-        if(
-          String(cafe.id) ===
-          String(id)
-        ){
+  if(!cafe) return;
 
-          return{
+  cafe.favorite =
+    !cafe.favorite;
 
-            ...cafe,
-
-            favorite:
-              !cafe.favorite
-
-          };
-
-        }
-
-        return cafe;
-
-      }
-    );
-
-
-  try{
-
-    localStorage.setItem(
-      "myCafeGuide",
-      JSON.stringify(
-        cafes
-      )
-    );
-
-  }catch(error){
-
-    alert(
-      "儲存失敗。"
-    );
-
-  }
-
+  localStorage.setItem(
+    "myCafeGuide",
+    JSON.stringify(cafes)
+  );
 
   renderCafes();
-
 }
 
+/* =========================
+   Google Maps
+========================= */
 
 function openMap(address){
 
   if(!address){
-
+    alert("這家店還沒有地址");
     return;
-
   }
-
 
   const url =
     "https://www.google.com/maps/search/?api=1&query=" +
-    encodeURIComponent(
-      address
-    );
+    encodeURIComponent(address);
 
-
-  window.open(
-    url,
-    "_blank"
-  );
-
+  window.open(url,"_blank");
 }
 
+/* =========================
+   Search
+========================= */
 
-searchInput.addEventListener(
-  "input",
-  renderCafes
-);
+document.getElementById("searchInput")
+  .addEventListener("input",function(){
 
+    renderCafes();
+  });
 
-function escapeHTML(value){
+/* =========================
+   Escape HTML
+========================= */
 
-  return String(
-    value || ""
-  )
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-  .replace(
-    /</g,
-    "&lt;"
-  )
-  .replace(
-    />/g,
-    "&gt;"
-  )
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-  .replace(
-    /'/g,
-    "&#039;"
-  );
+function escapeHTML(text){
 
+  return String(text || "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 }
 
+function escapeAttribute(text){
 
-function escapeAttribute(value){
-
-  return String(
-    value || ""
-  )
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-  .replace(
-    /'/g,
-    "&#039;"
-  )
-  .replace(
-    /</g,
-    "&lt;"
-  )
-  .replace(
-    />/g,
-    "&gt;"
-  );
-
+  return escapeHTML(text);
 }
 
+/* =========================
+   Modal background
+========================= */
 
-document
-.getElementById("modal")
-.addEventListener(
-  "click",
-  function(event){
+document.getElementById("modal")
+  .addEventListener("click",function(e){
 
-    if(
-      event.target === this
-    ){
-
+    if(e.target === this){
       closeModal();
-
     }
+  });
 
-  }
-);
+/* =========================
+   Init
+========================= */
 
-
-async function init(){
+(async function(){
 
   try{
-
-    await openImageDB();
-
-  }catch(error){
-
+    await initDB();
+  }catch(e){
     console.error(
-      "圖片資料庫開啟失敗",
-      error
+      "IndexedDB 初始化失敗",
+      e
     );
-
   }
 
-
   renderCategories();
+  renderCafes();
 
-  await renderCafes();
-
-}
-
-
-init();
-
+})();
 </script>
+
+<!-- HEIC / HEIF 支援 -->
+<script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
 
 </body>
 </html>
